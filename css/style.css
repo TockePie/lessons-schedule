@@ -1,0 +1,26 @@
+
+.navbar {
+    border-top: 0px;
+    border-bottom: 2px solid #2d313e;
+    background-color: #f0f0f0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#weekInfo {
+    font-size: 40px;
+    font-family: 'Montserrat ExtraBold';
+    text-align: center;
+    margin-left: 5px;
+}
+
+#chat_logo {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 20%;
+}
