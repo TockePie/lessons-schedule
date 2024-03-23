@@ -12,8 +12,17 @@ body {
 .header-content {
     margin-left: 5px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: space-between;
+}
+
+#academic-group {
+    float: right;
+    font-size: 30px;
+    font-family: 'Montserrat ExtraBold';
+    color: #006A98;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
 #chat_logo {
@@ -26,7 +35,7 @@ body {
 #weekInfo {
     font-size: 40px;
     font-family: 'Montserrat ExtraBold';
-    text-align: center;
+    text-align: left;
     margin-left: 5px;
 }
 
@@ -41,8 +50,8 @@ body {
     align-items: center;
     margin-top: 25px;
     margin-bottom: 8px;
-    margin-left: 130px;
-    margin-right: 10px;
+    margin-left: 155px;
+    margin-right: 50px;
 }
 
 /* Background table for lessons with lines */
@@ -105,6 +114,49 @@ body {
 .lower-time {
     vertical-align: bottom;
     margin-bottom: 5px;
+}
+
+.row-of-lessons {
+    display: flex;
+    flex-wrap: wrap; /* This allows the items to wrap onto the next line if there isn't enough space */
+}
+
+.lesson-info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+}
+
+.lesson-info-block-lecture {
+    box-shadow: 0 0 10px 0 #6773ff;
+}
+
+.lesson-info-block-practice {
+    box-shadow: 0 0 10px 0 #ff6b6b;
+}
+
+.lesson-info-block-lab {
+    box-shadow: 0 0 10px 0 #ff9f6b;
+}
+
+.null-lesson-info-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+
+    background-color: unset;
 }
 
 /* Responsive design */
