@@ -1,43 +1,43 @@
-var lecture;
-var practice;
-var lab;
+export const group = 'ІО-32';
+
+const emptyLesson = {
+    lessonName: null,
+    lessonType: null,
+    teacher: null
+};
 
 const evenLessonsInFirst = [
     {
         dayOfWeek: 1,
         lessonName: 'Дискретна математика',
-        lessonType: lecture,
+        lessonType: 'lecture',
         teacher: 'Новотарський М.А.'
     },
     {
         dayOfWeek: 2,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 3,
         lessonName: 'Фізика',
-        lessonType: lab,
+        lessonType: 'lab',
         teacher: 'Ляховецький В.Р.'
     },
     {
         dayOfWeek: 4,
         lessonName: 'Основи здоров\'я',
-        lessonType: practice,
+        lessonType: 'practice',
         teacher: 'Новицький Ю.В.'
     },
     {
         dayOfWeek: 5,
         lessonName: 'Фізика',
-        lessonType: lecture,
+        lessonType: 'lecture',
         teacher: 'Рускаов В.Ф.'
     },
     {
         dayOfWeek: 6,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     }
 ];
 
@@ -45,117 +45,143 @@ const evenLessonsInSecond = [
     {
         dayOfWeek: 1,
         lessonName: 'Вища математика',
-        lessonType: lecture,
+        lessonType: 'lecture',
         teacher: 'Голіченко І.І.'
     },
     {
         dayOfWeek: 2,
-        lessonName: null,
-        lessonType: null,
-        teacher:  null
+        ...emptyLesson
     },
     {
         dayOfWeek: 3,
         lessonName: 'Дискретна математика',
-        lessonType: lab,
+        lessonType: 'lab',
         teacher: 'Пономаренко А.М.'
     },
     {
         dayOfWeek: 4,
         lessonName: 'Фізика',
-        lessonType: practice,
+        lessonType: 'practice',
         teacher: 'Рускаов В.Ф.'
     },
     {
         dayOfWeek: 5,
         lessonName: 'Комп\'ютерна аритметика',
-        lessonType: lecture,
+        lessonType: 'lecture',
         teacher: 'Жабін В.І.'
     },
     {
         dayOfWeek: 6,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     }
 ];
 
 const evenLessonsInThird = [
     {
         dayOfWeek: 1,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 2,
         lessonName: 'Вища математика',
-        lessonType: practice,
+        lessonType: 'practice',
         teacher: 'Поліщук А.Ю.'
     },
     {
         dayOfWeek: 3,
         lessonName: 'Іноземна мова',
-        lessonType: practice,
+        lessonType: 'practice',
         teacher: 'Гаєва П.О.'
     },
     {
         dayOfWeek: 4,
         lessonName: 'Комп\'ютерна аритметика',
-        lessonType: lab,
+        lessonType: 'lab',
         teacher: 'Верба О.А.'
     },
     {
         dayOfWeek: 5,
         lessonName: 'Програмування',
-        lessonType: lecture,
+        lessonType: 'lecture',
         teacher: 'Алещенко О.В.'
     },
     {
         dayOfWeek: 6,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     }
 ];
 
 const evenLessonsInFourth = [
     {
         dayOfWeek: 1,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 2,
         lessonName: 'Культура мовлення',
-        lessonType: practice,
+        lessonType: 'practice',
         teacher: 'Онуфрієнко О.П.'
     },
     {
         dayOfWeek: 3,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 4,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 5,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
     {
         dayOfWeek: 6,
-        lessonName: null,
-        lessonType: null,
-        teacher: null
+        ...emptyLesson
     },
+];
+
+const oddLessonsInFirst = evenLessonsInFirst;
+
+const oddLessonsInSecond = [
+    ...evenLessonsInSecond.slice(0, 2),
+    {
+        dayOfWeek: 3,
+        lessonName: 'Вища математика',
+        lessonType: 'practice',
+        teacher: 'Поліщук А.Ю.'
+    },
+    ...evenLessonsInSecond.slice(3)
+];
+
+const oddLessonsInThird = [
+    {
+        dayOfWeek: 1,
+        lessonName: 'Вища математика',
+        lessonType: 'lecture',
+        teacher: 'Голіченко І.І.'
+    },
+    ...evenLessonsInThird.slice(1, 3),
+    {
+        dayOfWeek: 4,
+        lessonName: 'Програмування',
+        lessonType: 'lab',
+        teacher: 'Алещенко О.В.'
+    },
+    ...evenLessonsInThird.slice(4, 6)
+];
+
+const oddLessonsInFourth = [
+    {
+        dayOfWeek: 1,
+        lessonName: 'Культура мовлення',
+        lessonType: 'lecture',
+        teacher: 'Онуфрієнко О.П.'
+    },
+    {
+        dayOfWeek: 2,
+        ...emptyLesson
+    },
+    ...evenLessonsInFourth.slice(2)
 ];
 
 export const evenLessons = [
@@ -165,11 +191,9 @@ export const evenLessons = [
     evenLessonsInFourth
 ];
 
-/*
-const oddLessons = [
+export const oddLessons = [
     oddLessonsInFirst,
     oddLessonsInSecond,
     oddLessonsInThird,
     oddLessonsInFourth
 ];
-*/

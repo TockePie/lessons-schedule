@@ -1,6 +1,4 @@
-import { evenLessons } from './data.js';
-
-const group = 'ІО-32';
+import { group, evenLessons, oddLessons } from './data.js';
 
 function checkWeek() {
     let now = new Date();
@@ -13,7 +11,7 @@ function checkWeek() {
     let isOddWeek = weekNumber % 2 === 1;
     
     return isOddWeek;
-};
+}
 
 function addLessonToTable(isOddWeek) {
     const lessons = isOddWeek ? oddLessons : evenLessons;
@@ -32,24 +30,29 @@ function addLessonToTable(isOddWeek) {
             const lessonNameElement = lessonElement.querySelector('.lesson-name');
             const lessonTeacherElement = lessonElement.querySelector('.lesson-teacher');
 
-            if (lesson.lessonName !== null) {
-                lessonNameElement.textContent = lesson.lessonName;
-            } else {
+            if (lesson.lessonName == null && lesson.teacher == null) {
                 lessonNameElement.classList.add('null-lesson-info-block');
                 lessonElement.classList.remove(`.l${i + 1}-row-${j + 1}`);
                 lessonElement.classList.remove(`lesson-info-block`);
-            }
-
-            if (lesson.teacher !== null) {
-                lessonTeacherElement.textContent = lesson.teacher;
             } else {
-                lessonTeacherElement.classList.add('null-lesson-info-block');
-                lessonElement.classList.remove(`.l${i + 1}-row-${j + 1}`);
-                lessonElement.classList.remove(`lesson-info-block`);
+                lessonNameElement.textContent = lesson.lessonName;
+                lessonTeacherElement.textContent = lesson.teacher;
+
+                switch (lesson.lessonType) {
+                    case 'lecture':
+                        lessonElement.classList.add('lesson-lecture');
+                        break;
+                    case 'practice':
+                        lessonElement.classList.add('lesson-practice');
+                        break;
+                    case 'lab':
+                        lessonElement.classList.add('lesson-lab');
+                        break;
+                }
             }
         }
     }
-};
+}
 
 window.onload = function() {
     let isOddWeek = checkWeek();
@@ -61,4 +64,4 @@ window.onload = function() {
     rectangle.classList.add(isOddWeek ? 'odd-week-background-rectangle' : 'even-week-background-rectangle');
 
     addLessonToTable(isOddWeek);
-};
+}
