@@ -1,4 +1,4 @@
-import { group, evenLessons, oddLessons } from './data.js';
+import {evenLessons, group, oddLessons} from './data.js';
 
 function checkWeek() {
     let now = new Date();
@@ -8,9 +8,7 @@ function checkWeek() {
     let oneDay = 1000 * 60 * 60 * 24;
     let day = Math.floor(diff / oneDay);
     let weekNumber = Math.ceil(day / 7);
-    let isOddWeek = weekNumber % 2 === 1;
-    
-    return isOddWeek;
+    return weekNumber % 2 === 1;
 }
 
 function addLessonToTable(isOddWeek) {
@@ -37,6 +35,14 @@ function addLessonToTable(isOddWeek) {
             } else {
                 lessonNameElement.textContent = lesson.lessonName;
                 lessonTeacherElement.textContent = lesson.teacher;
+                lessonNameElement.addEventListener('click', function() {
+                    if (typeof lesson.url === 'function') {
+                        lesson.url();
+                    } else {
+                        window.open(lesson.url, '_blank');
+                    }
+                });
+                
 
                 switch (lesson.lessonType) {
                     case 'lecture':
