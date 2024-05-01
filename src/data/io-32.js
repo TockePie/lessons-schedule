@@ -1,4 +1,4 @@
-export const group = 'ІО-32';
+export const GROUP = 'ІО-32';
 
 const emptyLesson = {
     lessonName: null,
@@ -169,36 +169,12 @@ const oddLessonsInFirst = evenLessonsInFirst;
 
 const oddLessonsInSecond = [
     ...evenLessonsInSecond.slice(0, 2),
-    {
-        dayOfWeek: 3,
-        lessonName: 'Вища математика',
-        lessonType: 'practice',
-        teacher: 'Поліщук А.Ю.',
-        url: 'https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09'
-    },
+    evenLessonsInThird[1],
     ...evenLessonsInSecond.slice(3)
 ];
 
 const oddLessonsInThird = [
-    {
-        dayOfWeek: 1,
-        lessonName: 'Вища математика',
-        lessonType: 'lecture',
-        teacher: 'Голіченко І.І.',
-        url: () => {
-            const password = 'C2qR3w';
-            alert(`Після відкриття посилання вставте пароль:
-    ${password} (натисніть ОК для копіювання)`);
-            navigator.clipboard.writeText(password)
-            .then(() => {
-                console.log('Password copied to clipboard');
-            })
-            .catch(err => {
-                console.log('Could not copy text: ', err);
-            });
-            window.open('https://us02web.zoom.us/j/8067850314', '_blank')
-        },
-    },
+    evenLessonsInSecond[0],
     ...evenLessonsInThird.slice(1, 3),
     {
         dayOfWeek: 4,

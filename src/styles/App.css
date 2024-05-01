@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+}
+
+.lesson-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 120px;
+  height: 17.5vh;
+  overflow: auto;
+  margin-left: 10px;
+}
+
+.lesson-time {
+  font: 18px "Montserrat Light";
+  color: #006A98;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.lesson-position {
+  font-size: 27px;
+  font-family: "montserrat", serif;
+  text-align: center;
+}
+
+.upper-time {
+  margin-top: 5px;
+  vertical-align: top;
+}
+
+.lower-time {
+  vertical-align: bottom;
+  margin-bottom: 5px;
+}
+
+.row-of-lessons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+      background-color: #303030;
+      color: #ffffff;
+  }
+
+  .navbar {
+      background-color: #3C3C3C;
+      color: #ffffff;
+  }
+
+  #academic-group {
+      color:#00b3ff;
+  }
+
+  .days-of-the-week {
+      color: #ffffff;
+  }
+
+  .background-rectangle {
+      background-color: #1F2020;
+  }
+
+  .odd-week-background-rectangle {
+      background-color: #1E1E1E;
+  }
+
+  .even-week-background-rectangle {
+      background-color: #1E1E1E;
+  }
+
+  .separate-lines {
+      border-color: #ffffff;
+  }
+
+  .lesson-block {
+      background-color: #444444;
+  }
+
+  .lesson-time {
+      color: #ffffff;
+  }
+
+  .lesson-name {
+      color: #ffffff;
+  }
+
+  .lesson-teacher {
+      color: #ffffff;
+  }
+
+  .lesson-lecture {
+      box-shadow: 0 0 0 0 #6773ff;
+      background-color: #313779;
+      outline: 2px solid #6773ff;
+  }
+
+  .lesson-practice {
+      box-shadow: 0 0 0 0 #ff6b6b;
+      background-color: #6b2b2b;
+      outline: 2px solid #ff6b6b;
+  }
+
+  .lesson-lab {
+      box-shadow: 0 0 0 0 #33FF3B;
+      background-color: #136416;
+      outline: 2px solid #33FF3B;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .lesson-info-block {
+      width: 181px; /* Use the original width */
+  }
+}
