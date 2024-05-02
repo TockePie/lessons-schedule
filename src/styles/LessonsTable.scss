@@ -1,0 +1,129 @@
+tr {
+  height: 100%;
+}
+
+.table-bg {
+  margin: 1rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem 10px !important;
+  border-radius: 15px;
+
+  .card-title {
+    $margin-bottom: 1rem;
+
+    margin-top: $margin-bottom * 1.2;
+    margin-bottom: $margin-bottom;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .card-text {
+    // margin-top: 1.5rem;
+    // margin-bottom: 0rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: auto;
+  }
+}
+
+.custom-th {
+  display: inline-block;
+  min-width: 50px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+
+
+.days-of-the-week {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  text-align: justify;
+}
+
+.separate-lines {
+  position: relative;
+  grid-column: 1 / -1;
+  border-top: 1px dashed #000000;
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* .odd-week-background-rectangle {
+    background-color: #FFE8E8;
+}
+
+.even-week-background-rectangle {
+    background-color: #E5E8FF;
+} */
+
+.lesson-info-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+.lesson-name {
+  font-size: 23px;
+  font-family: "Montserrat", serif;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-top: auto;
+  cursor: pointer;
+  text-decoration: none;
+
+  :hover {
+    text-decoration: underline;
+  }
+}
+
+.lesson-teacher {
+  font: 15px "Montserrat";
+  font-weight: 400;
+  color: #000000;
+  text-align: center;
+  margin-top: auto;
+}
+
+.lecture {
+  box-shadow: 0 0 10px 0 #6773ff;
+}
+
+.practice {
+  box-shadow: 0 0 10px 0 #ff6b6b;
+}
+
+.lab {
+  box-shadow: 0 0 10px 0 #33ff3b;
+}
+
+.null-lesson-info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  padding: 20px;
+  margin-left: 20px;
+  border-radius: 10px;
+  cursor: default;
+  text-decoration: none;
+}

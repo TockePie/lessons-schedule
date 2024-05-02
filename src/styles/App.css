@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+main {
+  padding-top: 4rem;
+}
+
 .lesson-block {
   display: flex;
   flex-direction: column;

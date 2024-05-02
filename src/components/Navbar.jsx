@@ -1,19 +1,9 @@
 import { useEffect, useState } from "react";
+import { Container, DropdownButton, Navbar } from "react-bootstrap";
 
-import { GROUP } from "../data/io-32";
+import { checkWeek } from "../App.jsx";
 import GROUP_IMAGE from "../img/chat_logo.jpg";
-import "../styles/Navbar.css";
-
-export function checkWeek() {
-  let now = new Date();
-  let start = new Date(now.getFullYear(), 0, 0);
-
-  let diff = now - start;
-  let oneDay = 1000 * 60 * 60 * 24;
-  let day = Math.floor(diff / oneDay);
-  let weekNumber = Math.ceil(day / 7);
-  return weekNumber % 2 === 1;
-}
+import "../styles/Navbar.scss";
 
 function WeekInfo() {
   const isOddWeek = checkWeek();
@@ -25,23 +15,26 @@ function WeekInfo() {
     );
   }, [isOddWeek]);
 
-  return <b id="weekInfo">{weekText}</b>;
-}
-
-function GroupInfo() {
-  return <b id="academic-group">{GROUP}</b>;
+  return (
+    <h2>
+      <b>{weekText}</b>
+    </h2>
+  );
 }
 
 export default function App() {
   return (
-    <header className="navbar">
-      <div className="header-content">
-        <div className="header-left">
-          <img src={GROUP_IMAGE} alt="logo" id="chat_logo" />
+    <Navbar fixed="top">
+      <Container>
+        <Navbar.Brand>
+          <img src={GROUP_IMAGE} alt="logo" />
           <WeekInfo />
-        </div>
-          <GroupInfo />
-      </div>
-    </header>
+        </Navbar.Brand>
+        <DropdownButton
+          variant="outline-primary"
+          title="ІО-32"
+        ></DropdownButton>
+      </Container>
+    </Navbar>
   );
 }
