@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, DropdownButton, Navbar } from "react-bootstrap";
 
 import checkWeek from "./checkWeek";
-import GROUP_IMAGE from "../img/chat_logo.jpg";
+import GROUP_IMAGE from "../assets/chat_logo.svg";
 import "../styles/Navbar.scss";
 
 function WeekInfo() {
