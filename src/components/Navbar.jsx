@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, DropdownButton, Navbar } from "react-bootstrap";
 
-import { checkWeek } from "../App.jsx";
+import checkWeek from "./checkWeek";
 import GROUP_IMAGE from "../img/chat_logo.jpg";
 import "../styles/Navbar.scss";
 

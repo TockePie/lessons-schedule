@@ -1,20 +1,39 @@
-import { Table, Card, Container } from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
 
 import "../styles/LessonsTable.scss";
-import { checkWeek } from "../App.jsx";
+import checkWeek from "./checkWeek.js";
 import { evenLessons, oddLessons } from "../data/io-32.js";
 
+function checkDay() {
+  const currentDay = new Date().getDay();
+  return currentDay;
+}
+
 function DaysOfWeek() {
+  const currentDay = checkDay();
+  const days = [
+    "Понеділок",
+    "Вівторок",
+    "Середа",
+    "Четвер",
+    "П'ятниця",
+    "Субота",
+  ];
+
   return (
     <thead>
       <tr className="text-center">
-        <th id="lessons" className="col-1">Пари</th>
-        <th>Понеділок</th>
-        <th>Вівторок</th>
-        <th>Середа</th>
-        <th>Четвер</th>
-        <th>П'ятниця</th>
-        <th>Субота</th>
+        <th id="lessons" className="col-1">
+          Пари
+        </th>
+        {days.map((day, index) => (
+          <th
+            key={index}
+            className={currentDay === index + 1 ? "highlight" : ""}
+          >
+            {day}
+          </th>
+        ))}
       </tr>
     </thead>
   );
@@ -33,7 +52,10 @@ function Lessons({ ...props }) {
   return (
     <>
       {lessonsRow.map((lesson, index) => (
-        <th key={index} className="col-2">
+        <th
+          key={index}
+          className={`col-2 ${lesson.lessonName === null ? "null-lesson" : ""}`}
+        >
           <Card
             border={lessonTypeToColor[lesson.lessonType]}
             width="100%"
@@ -48,8 +70,10 @@ function Lessons({ ...props }) {
             }}
           >
             <Card.Body>
-              <Card.Title>{lesson.lessonName}</Card.Title>
-              <Card.Text>{lesson.teacher}</Card.Text>
+              <Card.Text className="lesson-name">
+                <b>{lesson.lessonName}</b>
+              </Card.Text>
+              <Card.Text className="lesson-teacher">{lesson.teacher}</Card.Text>
             </Card.Body>
           </Card>
         </th>
@@ -58,37 +82,44 @@ function Lessons({ ...props }) {
   );
 }
 
-function getBackgroundColor() {
-  if (checkWeek) {
-    return "#FFE8E8";
-  } else {
-    return "#E5E8FF";
-  }
-}
-
 export default function Main() {
+  const rowIndices = [
+    "firstLessonsRow",
+    "secondLessonsRow",
+    "thirdLessonsRow",
+    "fourthLessonsRow",
+  ];
+  const lessonTime = [
+    { start: "08:30", end: "10:05" },
+    { start: "10:25", end: "12:00" },
+    { start: "12:20", end: "13:55" },
+    { start: "14:10", end: "15:50" },
+  ];
+
   return (
     <div style={{ overflow: "hidden" }}>
       <div className="table-bg">
         <Table striped bordered>
           <DaysOfWeek />
           <tbody>
-            <tr>
-              <th>1 пара</th>
-              <Lessons isOddWeek={checkWeek()} rowIndex="firstLessonsRow" />
-            </tr>
-            <tr>
-              <th >2 пара</th>
-              <Lessons isOddWeek={checkWeek()} rowIndex="secondLessonsRow" />
-            </tr>
-            <tr>
-              <th className="custom-th">3 пара</th>
-              <Lessons isOddWeek={checkWeek()} rowIndex="thirdLessonsRow" />
-            </tr>
-            <tr>
-              <th className="custom-th">4 пара</th>
-              <Lessons isOddWeek={checkWeek()} rowIndex="fourthLessonsRow" />
-            </tr>
+            {rowIndices.map((rowIndex, i) => (
+              <tr className={i < 3 ? "hr-row" : ""} key={i}>
+                <th>
+                  <Card>
+                    <div className="lesson-time">
+                      <Card.Body>
+                        <Card.Text>{lessonTime[i].start}</Card.Text>
+                        <Card.Text className="lesson-index">
+                          {i + 1} пара
+                        </Card.Text>
+                        <Card.Text>{lessonTime[i].end}</Card.Text>
+                      </Card.Body>
+                    </div>
+                  </Card>
+                </th>
+                <Lessons isOddWeek={checkWeek()} rowIndex={rowIndex} />
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

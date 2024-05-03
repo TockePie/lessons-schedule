@@ -1,129 +1,78 @@
-tr {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-bg-type: transparent !important;
+}
+
+.table {
+  --bs-table-border-color: transparent !important;
+  table-layout: fixed;
+}
+
+thead tr th {
+  font-size: 1.2vi;
+}
+
+.card {
+  width: 100%;
   height: 100%;
+  box-sizing: border-box;
+}
+
+.hr-row {
+  border-bottom: 1px solid #cacaca;
+}
+
+.highlight {
+  background-color: rgb(255, 255, 160) !important;
+  border-radius: 10px;
 }
 
 .table-bg {
   margin: 1rem;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  padding: 0.5rem 10px !important;
-  border-radius: 15px;
+.null-lesson {
+  border: transparent !important;
+  background-color: transparent;
 
-  .card-title {
-    $margin-bottom: 1rem;
-
-    margin-top: $margin-bottom * 1.2;
-    margin-bottom: $margin-bottom;
-    font-size: 23px;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .card-text {
-    // margin-top: 1.5rem;
-    // margin-bottom: 0rem;
-    font-weight: 400;
-    text-align: center;
-    margin-top: auto;
+  div {
+    --bs-card-border-color: transparent !important;
   }
 }
 
-.custom-th {
-  display: inline-block;
-  min-width: 50px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-
-
-.days-of-the-week {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  justify-content: space-between;
-  justify-items: center;
-  align-items: center;
-  text-align: justify;
-}
-
-.separate-lines {
-  position: relative;
-  grid-column: 1 / -1;
-  border-top: 1px dashed #000000;
-  margin: 10px 0;
-  width: 100%;
-}
-
-/* .odd-week-background-rectangle {
-    background-color: #FFE8E8;
-}
-
-.even-week-background-rectangle {
-    background-color: #E5E8FF;
-} */
-
-.lesson-info-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: #ffffff;
+.lesson-index {
+  font-size: 1.4vi;
 }
 
 .lesson-name {
-  font-size: 23px;
-  font-family: "Montserrat", serif;
-  font-weight: 700;
-  color: #000000;
-  text-align: center;
-  margin-top: auto;
-  cursor: pointer;
-  text-decoration: none;
+  font-size: 1.4vi;
+  margin-bottom: 0;
 
-  :hover {
+  &:hover {
     text-decoration: underline;
   }
 }
 
 .lesson-teacher {
-  font: 15px "Montserrat";
-  font-weight: 400;
-  color: #000000;
-  text-align: center;
-  margin-top: auto;
+  font-size: 1vi;
 }
 
-.lecture {
-  box-shadow: 0 0 10px 0 #6773ff;
+.lesson-time div {
+  padding: 1vh !important;
+  font-size: 1vi;
 }
 
-.practice {
-  box-shadow: 0 0 10px 0 #ff6b6b;
-}
-
-.lab {
-  box-shadow: 0 0 10px 0 #33ff3b;
-}
-
-.null-lesson-info-block {
+.card-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 160px;
-  padding: 20px;
-  margin-left: 20px;
-  border-radius: 10px;
-  cursor: default;
-  text-decoration: none;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.5rem 10px !important;
+  height: 17vh;
+
+  .card-text {
+    font-weight: 400;
+    text-align: center;
+    margin-top: auto;
+  }
 }
