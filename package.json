@@ -1,4 +1,5 @@
 {
+  "homepage": "https://tockepie.github.io/lessons-schedule/",
   "name": "lessons-schedule",
   "private": true,
   "version": "0.0.0",
@@ -6,6 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -13,6 +16,7 @@
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
     "gh-pages": "^6.1.1",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-icons": "^1.11.4",

@@ -1,3 +1,14 @@
+main {
+  @media (prefers-color-scheme: dark) {
+    background-color: #212529 !important;
+  }
+}
+
+thead tr th {
+  font-size: 1.2vi;
+}
+
+//Customized Bootstrap classes
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-bg-type: transparent !important;
 }
@@ -7,58 +18,10 @@
   table-layout: fixed;
 }
 
-thead tr th {
-  font-size: 1.2vi;
-}
-
 .card {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-}
-
-.hr-row {
-  border-bottom: 1px solid #cacaca;
-}
-
-.highlight {
-  background-color: rgb(255, 255, 160) !important;
-  border-radius: 10px;
-}
-
-.table-bg {
-  margin: 1rem;
-}
-
-.null-lesson {
-  border: transparent !important;
-  background-color: transparent;
-
-  div {
-    --bs-card-border-color: transparent !important;
-  }
-}
-
-.lesson-index {
-  font-size: 1.4vi;
-}
-
-.lesson-name {
-  font-size: 1.4vi;
-  margin-bottom: 0;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.lesson-teacher {
-  font-size: 1vi;
-}
-
-.lesson-time div {
-  padding: 1vh !important;
-  font-size: 1vi;
 }
 
 .card-body {
@@ -75,4 +38,56 @@ thead tr th {
     text-align: center;
     margin-top: auto;
   }
+}
+
+// LessonTable.jsx
+.table-bg {
+  margin: 1rem;
+}
+
+//DaysOfWeek.jsx
+.highlight {
+  background-color: rgb(255, 255, 160) !important;
+  border-radius: 10px;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #646700 !important;
+  }
+}
+
+//TableBody.jsx
+.hr-row {
+  border-bottom: 1px solid #cacaca;
+}
+
+.lesson-time div {
+  padding: 1vh !important;
+  font-size: 1vi;
+}
+
+.lesson-index {
+  font-size: 1.4vi;
+}
+
+//LessonsBlock.jsx
+.null-lesson {
+  border: transparent !important;
+  background-color: transparent;
+
+  div {
+    --bs-card-border-color: transparent !important;
+  }
+}
+
+.lesson-name {
+  font-size: 1.4vi;
+  margin-bottom: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.lesson-teacher {
+  font-size: 1vi;
 }

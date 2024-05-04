@@ -1,5 +1,9 @@
 .navbar {
   --bs-navbar-padding-y: 0 !important;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #2d313e;
+  }
 }
 
 nav {
