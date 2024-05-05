@@ -17,9 +17,7 @@ export default function DaysOfWeek() {
   return (
     <thead>
       <tr className="text-center">
-        <th className="col-1">
-          Пари
-        </th>
+        <th className="col-1">Пари</th>
         {days.map((day, index) => (
           <th
             key={index}

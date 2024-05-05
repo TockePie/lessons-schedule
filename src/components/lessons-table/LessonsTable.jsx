@@ -5,7 +5,9 @@ import DaysOfWeek from "./DaysOfWeek.jsx";
 import TableBody from "./TableBody.jsx";
 
 export default function Main(props) {
-  const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDarkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   return (
     <div style={{ overflow: "hidden" }}>

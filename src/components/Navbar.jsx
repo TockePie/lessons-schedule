@@ -25,13 +25,21 @@ function WeekInfo() {
 }
 
 function GroupDropdown({ currentGroup, setCurrentGroup }) {
+  const isDarkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   const handleSelect = (group) => {
     setCurrentGroup(group);
     Cookies.set("group", group);
   };
 
   return (
-    <DropdownButton variant="outline-primary" title={currentGroup} data-bs-theme="dark">
+    <DropdownButton
+      variant="outline-primary"
+      title={currentGroup}
+      data-bs-theme={isDarkMode ? "dark" : "light"}
+    >
       <Dropdown.Item onClick={() => handleSelect("ІО-32")}>ІО-32</Dropdown.Item>
       <Dropdown.Item onClick={() => handleSelect("ІО-35")}>ІО-35</Dropdown.Item>
     </DropdownButton>
