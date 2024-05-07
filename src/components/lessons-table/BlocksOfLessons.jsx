@@ -1,13 +1,6 @@
 import { Card } from "react-bootstrap";
 
-import {
-  evenLessons as evenLessonsIO32,
-  oddLessons as oddLessonsIO32,
-} from "../../data/io-32.js";
-import {
-  evenLessons as evenLessonsIO35,
-  oddLessons as oddLessonsIO35,
-} from "../../data/io-35.js";
+import { groupData } from "../../data/groupData.js";
 
 export default function Lessons({ ...props }) {
   const lessonTypeToColor = {
@@ -16,14 +9,9 @@ export default function Lessons({ ...props }) {
     lab: "success",
   };
 
-  const lessonsData =
-    props.group === "ІО-32"
-      ? props.isOddWeek
-        ? oddLessonsIO32
-        : evenLessonsIO32
-      : props.isOddWeek
-      ? oddLessonsIO35
-      : evenLessonsIO35;
+  const lessonsData = props.isOddWeek
+    ? groupData[props.group]?.oddLessons
+    : groupData[props.group]?.evenLessons;
   const lessonsRow = lessonsData[props.rowIndex];
 
   return (

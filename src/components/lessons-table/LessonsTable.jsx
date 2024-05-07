@@ -1,19 +1,17 @@
 import { Table } from "react-bootstrap";
 
-import "../../styles/LessonsTable.scss";
-import DaysOfWeek from "./DaysOfWeek.jsx";
+import isDarkMode from "../../utils/isDarkMode";
+import DaysOfWeekRow from "./DaysOfWeekRow.jsx";
 import TableBody from "./TableBody.jsx";
 
-export default function Main(props) {
-  const isDarkMode =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+import "../../styles/LessonsTable.scss";
 
+export default function Main(props) {
   return (
     <div style={{ overflow: "hidden" }}>
       <div className="table-bg">
         <Table striped bordered data-bs-theme={isDarkMode ? "dark" : "light"}>
-          <DaysOfWeek />
+          <DaysOfWeekRow />
           <TableBody currentGroup={props.currentGroup} />
         </Table>
       </div>

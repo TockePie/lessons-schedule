@@ -1,7 +1,8 @@
 import { Card } from "react-bootstrap";
 
-import Lessons from "./LessonsBlocks";
-import checkWeek from "../checkWeek";
+import { groupData } from "../../data/groupData";
+import Lessons from "./BlocksOfLessons";
+import checkWeek from "../../utils/checkWeek";
 
 export default function TableBody(props) {
   const rowIndices = [
@@ -33,14 +34,7 @@ export default function TableBody(props) {
               </div>
             </Card>
           </th>
-          {props.currentGroup === "ІО-32" && (
-            <Lessons
-              isOddWeek={checkWeek()}
-              rowIndex={rowIndex}
-              group={props.currentGroup}
-            />
-          )}
-          {props.currentGroup === "ІО-35" && (
+          {groupData[props.currentGroup] && (
             <Lessons
               isOddWeek={checkWeek()}
               rowIndex={rowIndex}

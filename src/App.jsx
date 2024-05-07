@@ -1,9 +1,10 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
 
-import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import LessonsTable from "./components/lessons-table/LessonsTable";
+
+import "./styles/App.scss";
 
 export default function App() {
   const [currentGroup, setCurrentGroup] = useState(

@@ -1,7 +1,4 @@
-function checkDay() {
-  const currentDay = new Date().getDay();
-  return currentDay;
-}
+import checkDay from "../../utils/checkDay";
 
 export default function DaysOfWeek() {
   const currentDay = checkDay();

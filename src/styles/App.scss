@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+main {
+  padding-top: 4rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #212529 !important;
+  }
+}
