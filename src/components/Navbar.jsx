@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import {
   Container,
@@ -14,15 +15,22 @@ import { groupData } from "../data/groupData";
 
 import "../styles/Navbar.scss";
 
-function WeekInfo() {
+function WeekInfo(props) {
   const isOddWeek = checkWeek();
   const [weekText, setWeekText] = useState("");
 
   useEffect(() => {
-    setWeekText(
-      isOddWeek ? "Непарний тиждень: розклад" : "Парний тиждень: розклад"
-    );
-  }, [isOddWeek]);
+    switch (props.screen) {
+      case "desktop":
+        setWeekText(
+          isOddWeek ? "Непарний тиждень: розклад" : "Парний тиждень: розклад"
+        );
+        break;
+      case "mobile":
+        setWeekText(isOddWeek ? "Непарний" : "Парний");
+        break;
+    }
+  }, [isOddWeek, props.screen]);
 
   return (
     <h2>
@@ -78,6 +86,8 @@ function GroupDropdown(props) {
 }
 
 export default function App(props) {
+  const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 645 });
+  const isMobile = useMediaQuery({ maxDeviceWidth: 645 });
   const groupLogo = groupData[props.currentGroup]?.image;
 
   return (
@@ -85,8 +95,9 @@ export default function App(props) {
       <Container>
         <Navbar.Brand>
           {groupLogo && <img src={groupLogo} alt="logo" />}
-          <WeekInfo />
+          {isDesktopOrLaptop && <WeekInfo screen="desktop" />}
         </Navbar.Brand>
+        {isMobile && <WeekInfo screen="mobile" />}
         <GroupDropdown
           currentGroup={props.currentGroup}
           setCurrentGroup={props.setCurrentGroup}
