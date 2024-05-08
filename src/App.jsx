@@ -11,11 +11,22 @@ export default function App() {
     Cookies.get("group") || "Оберіть групу"
   );
 
+  const initialPwaZoom = Cookies.get("isPwaZoom") === "1" ? true : false;
+  const [isPwaZoom, setIsPwaZoom] = useState(initialPwaZoom);
+
   return (
     <>
-      <Navbar currentGroup={currentGroup} setCurrentGroup={setCurrentGroup} />
+      <Navbar
+        currentGroup={currentGroup}
+        setCurrentGroup={setCurrentGroup}
+        isPwaZoom={isPwaZoom}
+        setIsPwaZoom={setIsPwaZoom}
+      />
       <main>
-        <LessonsTable currentGroup={currentGroup} />
+        <LessonsTable 
+          currentGroup={currentGroup}
+          isPwaZoom={isPwaZoom}
+          />
       </main>
     </>
   );

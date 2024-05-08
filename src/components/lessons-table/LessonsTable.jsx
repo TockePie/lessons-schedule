@@ -10,9 +10,12 @@ export default function Main(props) {
   return (
     <div style={{ overflow: "hidden" }}>
       <div className="table-bg">
-        <Table striped bordered data-bs-theme={isDarkMode ? "dark" : "light"}>
+        <Table striped bordered data-bs-theme={isDarkMode() ? "dark" : "light"}>
           <DaysOfWeekRow />
-          <TableBody currentGroup={props.currentGroup} />
+          <TableBody
+            currentGroup={props.currentGroup}
+            isPwaZoom={props.isPwaZoom}
+          />
         </Table>
       </div>
     </div>

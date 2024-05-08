@@ -1,16 +1,7 @@
 import checkDay from "../../utils/checkDay";
+import { days } from "../../common/constants";
 
 export default function DaysOfWeek() {
-  const currentDay = checkDay();
-  const days = [
-    "Понеділок",
-    "Вівторок",
-    "Середа",
-    "Четвер",
-    "П'ятниця",
-    "Субота",
-  ];
-
   return (
     <thead>
       <tr className="text-center">
@@ -18,7 +9,7 @@ export default function DaysOfWeek() {
         {days.map((day, index) => (
           <th
             key={index}
-            className={currentDay === index + 1 ? "highlight" : ""}
+            className={checkDay() === index + 1 ? "highlight" : ""}
           >
             {day}
           </th>

@@ -1,14 +1,9 @@
 import { Card } from "react-bootstrap";
 
 import { groupData } from "../../data/groupData.js";
+import { lessonTypeToColor } from "../../common/constants.js";
 
 export default function Lessons({ ...props }) {
-  const lessonTypeToColor = {
-    lecture: "primary",
-    practice: "danger",
-    lab: "success",
-  };
-
   const lessonsData = props.isOddWeek
     ? groupData[props.group]?.oddLessons
     : groupData[props.group]?.evenLessons;
@@ -25,11 +20,17 @@ export default function Lessons({ ...props }) {
             border={lessonTypeToColor[lesson.lessonType]}
             width="100%"
             onClick={() => {
-              if (lesson.url) {
-                if (typeof lesson.url === "function") {
-                  lesson.url();
-                } else {
-                  window.open(lesson.url);
+              if (props.isPwaZoom) {
+                if (lesson.urlPWA) {
+                  typeof lesson.urlPWA === "function"
+                    ? lesson.urlPWA()
+                    : window.open(lesson.urlPWA);
+                }
+              } else {
+                if (lesson.url) {
+                  typeof lesson.url === "function"
+                    ? lesson.url()
+                    : window.open(lesson.url);
                 }
               }
             }}
