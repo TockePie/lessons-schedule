@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { useState } from "react";
 
 import Navbar from "./components/Navbar";
@@ -8,10 +7,10 @@ import "./styles/App.scss";
 
 export default function App() {
   const [currentGroup, setCurrentGroup] = useState(
-    Cookies.get("group") || "Оберіть групу"
+    localStorage.getItem("group") || "Оберіть групу"
   );
 
-  const initialPwaZoom = Cookies.get("isPwaZoom") === "1" ? true : false;
+  const initialPwaZoom = localStorage.getItem("isPwaZoom") === "1" ? true : false;
   const [isPwaZoom, setIsPwaZoom] = useState(initialPwaZoom);
 
   return (

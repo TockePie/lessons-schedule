@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import {
@@ -42,17 +41,17 @@ function WeekInfo(props) {
 function GroupDropdown(props) {
   const handleSelect = (group) => {
     props.setCurrentGroup(group);
-    Cookies.set("group", group);
+    localStorage.setItem("group", group);
     if (group === "ІО-35") {
       props.setIsPwaZoom(false);
-      Cookies.set("isPwaZoom", "0");
+      localStorage.setItem("isPwaZoom", "0");
     }
   };
 
   const handlePwaZoom = () => {
     const newState = !props.isPwaZoom;
     props.setIsPwaZoom(newState);
-    Cookies.set("isPwaZoom", newState ? "1" : "0");
+    localStorage.setItem("isPwaZoom", newState ? "1" : "0");
   };
 
   return (
@@ -71,7 +70,7 @@ function GroupDropdown(props) {
             id="custom-switch"
             onChange={handlePwaZoom}
             checked={props.isPwaZoom}
-            disabled={Cookies.get("group") === "ІО-35"}
+            disabled={localStorage.getItem("group") === "ІО-35"}
           />
         </Form>
       </Dropdown.Header>
