@@ -14,9 +14,9 @@ import {
   oddLessons as oddLessonsAleshchenkoOV,
 } from "./aleshchenkoOV";
 
-import IO32Image from "../public/chat_logo_io-32.svg";
-import IO35Image from "../public/chat_logo_io-35.jpg";
-import AleshchenkoOVImage from "../public/aleshchenkoOV.png";
+import IO32Image from "../assets/chat_logo_io-32.jpg";
+import IO35Image from "../assets/chat_logo_io-35.jpg";
+import AleshchenkoOVImage from "../assets/aleshchenkoOV.png";
 
 export const groupData = {
   "ІО-32": {

@@ -10,7 +10,7 @@ const emptyLesson = {
 export const evenLessons = {
   firstLessonsRow: [
     {
-      dayOfWeek: 1,
+      dayOfWeek: "mon",
       lessonName: "Дискретна математика",
       lessonType: "lecture",
       teacher: "Новотарський М.А.",
@@ -19,11 +19,11 @@ export const evenLessons = {
         "https://app.zoom.us/wc/87578307057/join?pwd=UGwyVGlwc3M4Q0Q0Q0NLWUt6bmVpUT09&fromPWA=1",
     },
     {
-      dayOfWeek: 2,
+      dayOfWeek: "tue",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 3,
+      dayOfWeek: "wed",
       lessonName: "Фізика",
       lessonType: "lab",
       teacher: "Ляховецький В.Р.",
@@ -32,7 +32,7 @@ export const evenLessons = {
         "https://app.zoom.us/wc/76362666471/join?pwd=bDVWbTRRdTIwT3h4RCszcEhOWDQ0QT09&fromPWA=1",
     },
     {
-      dayOfWeek: 4,
+      dayOfWeek: "thu",
       lessonName: "Основи здоров'я",
       lessonType: "practice",
       teacher: "Новицький Ю.В.",
@@ -41,7 +41,7 @@ export const evenLessons = {
         "https://app.zoom.us/wc/98105710510/join?pwd=QWltN0NnTm1yNGttTHVaQVVqdHVrdz09&fromPWA=1",
     },
     {
-      dayOfWeek: 5,
+      dayOfWeek: "fri",
       lessonName: "Фізика",
       lessonType: "lecture",
       teacher: "Русаков В.Ф.",
@@ -49,13 +49,13 @@ export const evenLessons = {
       urlPWA: "https://meet.google.com/mie-rrfc-aeo?hs=151",
     },
     {
-      dayOfWeek: 6,
+      dayOfWeek: "sat",
       ...emptyLesson,
     },
   ],
   secondLessonsRow: [
     {
-      dayOfWeek: 1,
+      dayOfWeek: "mon",
       lessonName: "Вища математика",
       lessonType: "lecture",
       teacher: "Голіченко І.І.",
@@ -75,11 +75,11 @@ export const evenLessons = {
       },
     },
     {
-      dayOfWeek: 2,
+      dayOfWeek: "tue",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 3,
+      dayOfWeek: "wed",
       lessonName: "Дискретна математика",
       lessonType: "lab",
       teacher: "Пономаренко А.М.",
@@ -88,7 +88,7 @@ export const evenLessons = {
         "https://app.zoom.us/wc/7089075754/join?pwd=TWRlZmxyVlFiTWU1UGlVVU1XcFE0Zz09&fromPWA=1",
     },
     {
-      dayOfWeek: 4,
+      dayOfWeek: "thu",
       lessonName: "Фізика",
       lessonType: "practice",
       teacher: "Рускаов В.Ф.",
@@ -96,7 +96,7 @@ export const evenLessons = {
       urlPWA: "https://meet.google.com/mie-rrfc-aeo?hs=151",
     },
     {
-      dayOfWeek: 5,
+      dayOfWeek: "fri",
       lessonName: "Комп'ютерна аритметика",
       lessonType: "lecture",
       teacher: "Жабін В.І.",
@@ -104,17 +104,17 @@ export const evenLessons = {
       urlPWA: "https://bbb.comsys.kpi.ua/rooms/vqj-umt-tas-leo/join",
     },
     {
-      dayOfWeek: 6,
+      dayOfWeek: "sat",
       ...emptyLesson,
     },
   ],
   thirdLessonsRow: [
     {
-      dayOfWeek: 1,
+      dayOfWeek: "mon",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 2,
+      dayOfWeek: "tue",
       lessonName: "Вища математика",
       lessonType: "practice",
       teacher: "Поліщук А.Ю.",
@@ -123,15 +123,15 @@ export const evenLessons = {
         "https://app.zoom.us/wc/2530562585/join?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09&fromPWA=1",
     },
     {
-      dayOfWeek: 3,
+      dayOfWeek: "wed",
       lessonName: "Іноземна мова",
       lessonType: "practice",
       teacher: "Гаєва П.О.",
       url: "https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
-      urlPWA: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVs",
+      urlPWA: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
     },
     {
-      dayOfWeek: 4,
+      dayOfWeek: "thu",
       lessonName: "Комп'ютерна аритметика",
       lessonType: "lab",
       teacher: "Верба О.А.",
@@ -140,7 +140,7 @@ export const evenLessons = {
         "https://app.zoom.us/wc/7382214783/join?pwd=RnZ3SWgwK1JoVkZtNndnKzdPZjFGdz09&fromPWA=1",
     },
     {
-      dayOfWeek: 5,
+      dayOfWeek: "fri",
       lessonName: "Програмування",
       lessonType: "lecture",
       teacher: "Алещенко О.В.",
@@ -149,17 +149,17 @@ export const evenLessons = {
         "https://app.zoom.us/wc/2711546637/join?pwd=Ry82RHp3SjV6WTZRMXl6WUNod25hUT09&fromPWA=1",
     },
     {
-      dayOfWeek: 6,
+      dayOfWeek: "sat",
       ...emptyLesson,
     },
   ],
   fourthLessonsRow: [
     {
-      dayOfWeek: 1,
+      dayOfWeek: "mon",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 2,
+      dayOfWeek: "tue",
       lessonName: "Культура мовлення",
       lessonType: "practice",
       teacher: "Онуфрієнко О.П.",
@@ -168,19 +168,19 @@ export const evenLessons = {
         "https://app.zoom.us/wc/89608497213/join?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1&fromPWA=1",
     },
     {
-      dayOfWeek: 3,
+      dayOfWeek: "wed",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 4,
+      dayOfWeek: "thu",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 5,
+      dayOfWeek: "fri",
       ...emptyLesson,
     },
     {
-      dayOfWeek: 6,
+      dayOfWeek: "sat",
       ...emptyLesson,
     },
   ],
@@ -197,7 +197,7 @@ export const oddLessons = {
     evenLessons.secondLessonsRow[0],
     ...evenLessons.thirdLessonsRow.slice(1, 3),
     {
-      dayOfWeek: 4,
+      dayOfWeek: "thu",
       lessonName: "Програмування",
       lessonType: "lab",
       teacher: "Алещенко О.В.",
@@ -209,7 +209,7 @@ export const oddLessons = {
   ],
   fourthLessonsRow: [
     {
-      dayOfWeek: 1,
+      dayOfWeek: "mon",
       lessonName: "Культура мовлення",
       lessonType: "lecture",
       teacher: "Онуфрієнко О.П.",
@@ -218,7 +218,7 @@ export const oddLessons = {
         "https://app.zoom.us/wc/89608497213/join?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1&fromPWA=1",
     },
     {
-      dayOfWeek: 2,
+      dayOfWeek: "tue",
       ...emptyLesson,
     },
     ...evenLessons.fourthLessonsRow.slice(2),
