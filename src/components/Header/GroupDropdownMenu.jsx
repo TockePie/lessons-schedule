@@ -73,7 +73,11 @@ export default function GroupDropdown() {
           </Switch>
         </DropdownItem>
         {Object.keys(groupData).map((group) => (
-          <DropdownItem key={group} onClick={() => handleSelect(group)}>
+          <DropdownItem
+            key={group}
+            onClick={() => handleSelect(group)}
+            onTouchEnd={() => handleSelect(group)}
+          >
             {group}
           </DropdownItem>
         ))}

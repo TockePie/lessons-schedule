@@ -8,12 +8,15 @@ import {
   TableRow,
   Card,
   CardBody,
-  Button,
 } from "@nextui-org/react";
 
 import checkDay from "../utils/checkDay.js";
 import checkWeek from "../utils/checkWeek.js";
-import { lessonTypeToColor, days, rowIndices, lessonTime } from "../common/constants.js";
+import {
+  lessonTypeToColor,
+  days,
+  rowIndices,
+} from "../common/constants.js";
 import { groupData } from "../data/groupData.js";
 
 import { GroupContext } from "../context/GroupPlatformInfo.jsx";
@@ -104,7 +107,6 @@ function DesktopTable({ currentGroup }) {
                             {lesson.lessonName}
                           </b>
                           <a>{lesson.teacher}</a>
-
                         </CardBody>
                       </Card>
                     )}
@@ -182,9 +184,9 @@ function MobileTable({ currentGroup }) {
                     className="text-nowrap h-[17vh] noselect"
                   >
                     <CardBody>
-                      <CardBody className="flex items-center">
+                      <CardBody className="flex items-center justify-between px-2">
                         <p>{time.start}</p>
-                        <p>{i + 1} пара</p>
+                        <b className="text-large">{i + 1} пара</b>
                         <p>{time.end}</p>
                       </CardBody>
                     </CardBody>
