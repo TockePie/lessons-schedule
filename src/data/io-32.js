@@ -128,7 +128,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Гаєва П.О.",
       url: "https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
-      urlPWA: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVs",
+      urlPWA: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
     },
     {
       dayOfWeek: 4,

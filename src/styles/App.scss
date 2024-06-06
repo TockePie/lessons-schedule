@@ -5,5 +5,7 @@ body {
 }
 
 main {
-  padding-top: 4rem;
+  @media (min-width: 845px) {
+    padding-top: 4rem;
+  }
 }

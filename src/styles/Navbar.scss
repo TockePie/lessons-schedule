@@ -18,6 +18,10 @@ nav {
       @media (prefers-color-scheme: dark) {
         color: #f0f0f0 !important;
       }
+
+      @media (max-width: 768px) {
+        margin-bottom: 0;
+      }
     }
 
     span {

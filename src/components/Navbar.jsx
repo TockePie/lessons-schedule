@@ -90,7 +90,7 @@ export default function App(props) {
   const groupLogo = groupData[props.currentGroup]?.image;
 
   return (
-    <Navbar fixed="top">
+    <Navbar fixed={isMobile ? "" : "top"}>
       <Container>
         <Navbar.Brand>
           {groupLogo && <img src={groupLogo} alt="logo" />}
