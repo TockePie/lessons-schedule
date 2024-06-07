@@ -18,7 +18,7 @@ import IO32Image from "../assets/chat_logo_io-32.jpg";
 import IO35Image from "../assets/chat_logo_io-35.jpg";
 import AleshchenkoOVImage from "../assets/aleshchenkoOV.png";
 
-export const groupData = {
+const groupData = {
   "ІО-32": {
     data: GROUP32,
     image: IO32Image,
@@ -38,3 +38,5 @@ export const groupData = {
     oddLessons: oddLessonsAleshchenkoOV,
   },
 };
+
+export default groupData;

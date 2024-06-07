@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes";
 
 import Header from "./components/Header/Header";
-import LessonsTable from "./components/Table";
+import LessonsTable from "./components/Tables/Table";
 
 import { GroupProvider } from "./context/GroupPlatformInfo";
 import { MobileProvider } from "./context/MobileContext";

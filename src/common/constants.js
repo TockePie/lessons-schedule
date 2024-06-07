@@ -4,20 +4,14 @@ const lessonTypeToColor = {
   lab: "border-lime-500",
 };
 
-const days = [
-  { key: "mon", label: "Понеділок" },
-  { key: "tue", label: "Вівторок" },
-  { key: "wed", label: "Середа" },
-  { key: "thu", label: "Четвер" },
-  { key: "fri", label: "П'ятниця" },
-  { key: "sat", label: "Субота" },
-];
-
 const rowIndices = [
   ["firstLessonsRow", { start: "08:30", end: "10:05" }],
   ["secondLessonsRow", { start: "10:25", end: "12:00" }],
   ["thirdLessonsRow", { start: "12:20", end: "13:55" }],
   ["fourthLessonsRow", { start: "14:10", end: "15:50" }],
+  ["fifthLessonsRow", { start: "16:10", end: "17:40" }],
+  ["sixthLessonsRow", { start: "18:30", end: "20:00" }],
+  ["seventhLessonsRow", { start: "20:20", end: "21:50" }],
 ];
 
 const lessonTime = [
@@ -27,4 +21,4 @@ const lessonTime = [
   { start: "14:10", end: "15:50" },
 ];
 
-export { lessonTypeToColor, days, rowIndices, lessonTime };
+export { lessonTypeToColor, rowIndices, lessonTime };

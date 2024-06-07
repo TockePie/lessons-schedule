@@ -11,7 +11,7 @@ import {
 
 import { GroupContext } from "../../context/GroupPlatformInfo";
 import { MobileContext } from "../../context/MobileContext";
-import { groupData } from "../../data/groupData";
+import groupData from "../../data/groupData";
 
 export default function GroupDropdown() {
   const { currentGroup, setCurrentGroup, isPwaZoom, setIsPwaZoom } =
@@ -62,7 +62,7 @@ export default function GroupDropdown() {
           {isDesktopOrLaptop && <Kbd>Q</Kbd>}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu disabledKeys={["ІО-35"]}>
+      <DropdownMenu>
         <DropdownItem>
           <Switch
             onValueChange={handlePwaZoom}
