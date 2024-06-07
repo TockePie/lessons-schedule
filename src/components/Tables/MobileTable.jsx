@@ -1,5 +1,5 @@
-import { useContext } from "react";
-
+import { useContext, Fragment, useMemo, useCallback } from "react";
+import useScreenOrientation from "react-hook-screen-orientation";
 import {
   Card,
   CardBody,
@@ -22,92 +22,125 @@ import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
 
 export default function MobileTable() {
   const { currentGroup } = useContext(GroupContext);
+  const screenOrientation = useScreenOrientation();
 
   const lessonsData = checkWeek()
     ? groupData[currentGroup]?.oddLessons
     : groupData[currentGroup]?.evenLessons;
 
-  const getLessonsForDay = (day, rowName) => {
-    return (
-      lessonsData?.[rowName]?.filter((lesson) => lesson.dayOfWeek === day) || []
-    );
-  };
+  const getLessonsForDay = useCallback(
+    (day, rowName) => {
+      return (
+        lessonsData?.[rowName]?.filter((lesson) => lesson.dayOfWeek === day) ||
+        []
+      );
+    },
+    [lessonsData]
+  );
 
-  return (
-    <div className="m-2">
-      <Table aria-label="Lessons Table">
-        <TableHeader>
-          <TableColumn key="lessons" className="max-w-10">
-            <div className="flex justify-center">Пари</div>
-          </TableColumn>
-          <TableColumn>
-            <div className="flex justify-center">{currentDay}</div>
-          </TableColumn>
-        </TableHeader>
-        <TableBody
-          emptyContent={
-            <div className="flex flex-col justify-center">
-              <b>Розклад відсутній. Оберіть групу, щоб побачити заняття.</b>
-            </div>
-          }
-        >
-          {rowIndices.map(([rowName, time], i) => {
-            if (currentGroup === "Оберіть групу") return;
-            const lessonRow = getLessonsForDay(checkDay(), rowName);
+  const orientationValues = useCallback(
+    (special, defaultValue) => {
+      switch (screenOrientation) {
+        case "landscape-primary":
+          return special;
+        case "landscape-secondary":
+          return special;
+        default:
+          return defaultValue;
+      }
+    },
+    [screenOrientation]
+  );
 
-            return (
-              <TableRow key={rowName}>
-                <TableCell className="min-w-16">
-                  <Card
-                    aria-label="Time Card"
-                    className="text-nowrap h-[17vh] noselect"
-                  >
-                    <CardBody>
-                      <CardBody className="flex items-center justify-between px-2">
-                        <p>{time.start}</p>
-                        <b className="text-large">{i + 1} пара</b>
-                        <p>{time.end}</p>
-                      </CardBody>
+  const memorizedTableHeader = useMemo(
+    () => (
+      <TableHeader>
+        <TableColumn key="lessons" className="max-w-10">
+          <div className="flex justify-center">Пари</div>
+        </TableColumn>
+        <TableColumn>
+          <div className="flex justify-center">{currentDay}</div>
+        </TableColumn>
+      </TableHeader>
+    ),
+    []
+  );
+
+  const memorizedTableBody = useMemo(
+    () => (
+      <TableBody
+        emptyContent={
+          <div className="flex flex-col justify-center">
+            <b>Розклад відсутній. Оберіть групу, щоб побачити заняття.</b>
+          </div>
+        }
+      >
+        {rowIndices.map(([rowName, time], i) => {
+          if (currentGroup === "Оберіть групу") return;
+          const lessonRow = getLessonsForDay(checkDay(), rowName);
+          if (getLessonsForDay(checkDay(), rowName).length === 0) return;
+
+          return (
+            <TableRow key={rowName}>
+              <TableCell className="min-w-16">
+                <Card
+                  aria-label="Time Card"
+                  className={`text-nowrap noselect ${orientationValues(
+                    "h-full",
+                    "h-[17vh]"
+                  )}`}
+                >
+                  <CardBody>
+                    <CardBody className="flex items-center justify-between px-2 overflow-y-hidden">
+                      <p>{time.start}</p>
+                      <b className="text-large">{i + 1} пара</b>
+                      <p>{time.end}</p>
                     </CardBody>
-                  </Card>
-                </TableCell>
-                <TableCell className="min-w-48 max-w-48">
-                  {lessonRow.length > 0 ? (
-                    lessonRow.map((lesson, idx) => (
+                  </CardBody>
+                </Card>
+              </TableCell>
+              <TableCell className="min-w-44 max-w-44">
+                {lessonRow.map((lesson, idx) => (
+                  <Fragment key={lesson.id || `lesson-${idx}`}>
+                    {lesson.lessonType != null && (
                       <Card
                         key={idx}
                         aria-label="Lesson Card"
-                        className={`noselect ${
-                          lessonTypeToColor[lesson.lessonType]
-                        } h-[17vh] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
+                        className={`noselect 
+                      active:bg-zinc-300 
+                      hover:bg-zinc-200 
+                      dark:active:bg-zinc-800 
+                      dark:hover:bg-zinc-700 
+                      cursor-pointer border-1 w-full ${
+                        lessonTypeToColor[lesson.lessonType]
+                      } ${orientationValues("h-[34vh]", "h-[17vh]")}`}
                         isPressable
                         onPress={() => openLesson(lesson, false)}
                       >
-                        <CardBody className="flex items-center justify-center">
+                        <CardBody className="flex items-center justify-center overflow-hidden">
                           <b className="mt-auto mb-auto text-center text-xl p-2">
                             {lesson.lessonName}
                           </b>
                           <a>{lesson.teacher}</a>
                         </CardBody>
                       </Card>
-                    ))
-                  ) : (
-                    <Card
-                      aria-label="No Lesson Card"
-                      className="noselect h-[17vh]"
-                    >
-                      <CardBody className="flex items-center justify-center">
-                        <b className="mt-auto mb-auto text-center text-xl p-2">
-                          No lessons
-                        </b>
-                      </CardBody>
-                    </Card>
-                  )}
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
+                    )}
+                  </Fragment>
+                ))}
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    ),
+    [currentGroup, getLessonsForDay, orientationValues]
+  );
+
+  return (
+    <div className={orientationValues("mx-14 my-2", "mx-2 my-2")}>
+      <Table aria-label="Lessons Table">
+        {memorizedTableHeader}
+        {memorizedTableBody}
       </Table>
     </div>
   );

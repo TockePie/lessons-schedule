@@ -23,7 +23,7 @@ export default function GroupDropdown() {
     (group) => {
       setCurrentGroup(group);
       localStorage.setItem("group", group);
-      if (group === "ІО-35") {
+      if (!groupData[group].allowPwaZoom) {
         setIsPwaZoom(false);
         localStorage.setItem("isPwaZoom", "0");
       }
@@ -67,7 +67,7 @@ export default function GroupDropdown() {
           <Switch
             onValueChange={handlePwaZoom}
             isSelected={isDesktopOrLaptop && isPwaZoom}
-            isDisabled={localStorage.getItem("group") === "ІО-35" || isMobile}
+            isDisabled={!groupData[currentGroup]?.allowPwaZoom || isMobile}
           >
             PWA ZOOM
           </Switch>

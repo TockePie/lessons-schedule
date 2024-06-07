@@ -18,7 +18,7 @@ function Header() {
   const groupLogo = groupData[currentGroup]?.image;
 
   return (
-    <Navbar>
+    <Navbar isBordered={isMobile} shouldHideOnScroll={isMobile}>
       <NavbarBrand>
         <LazyImage width={50} alt="logo" src={groupLogo} />
         {isDesktopOrLaptop && <WeekInfo screen="desktop" />}

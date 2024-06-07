@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Table, TableBody, TableColumn, TableHeader } from "@nextui-org/react";
 
 import checkDay from "../../utils/checkDay.js";
@@ -8,22 +8,22 @@ import { MobileContext } from "../../context/MobileContext";
 
 import sunInSunglasses from "../../assets/sun_in_sunglasses.png";
 
-const summerTable = () => {
-  return (
-    <div className="flex flex-col">
-      <img
-        src={sunInSunglasses}
-        alt="sun"
-        className="mx-auto mt-10 w-60 h-60"
-      />
-      <b className="mb-2 text-gray-800 dark:text-gray-100 just-me-again-down-here-regular">It&apos;s summertime!</b>
-      <a className="mb-8 dark:text-gray-500">Відпочивайте та насолоджуйтесь літом!</a>
-    </div>
-  );
-};
-
 export default function Summertime() {
   const { isMobile } = useContext(MobileContext);
+
+  const SummerTable = useMemo(() => {
+    return (
+      <div className="flex flex-col">
+        <img
+          src={sunInSunglasses}
+          alt="sun"
+          className="mx-auto mt-10 w-60 h-60"
+        />
+        <b className="mb-2 text-gray-800 dark:text-gray-100 just-me-again-down-here-regular">It&apos;s summertime!</b>
+        <a className="mb-8 dark:text-gray-500">Відпочивайте та насолоджуйтесь літом!</a>
+      </div>
+    );
+  }, []);
 
   if (isMobile) {
     return (
@@ -37,7 +37,7 @@ export default function Summertime() {
               <div className="flex justify-center">{currentDay}</div>
             </TableColumn>
           </TableHeader>
-          <TableBody emptyContent={summerTable()}></TableBody>
+          <TableBody emptyContent={SummerTable}></TableBody>
         </Table>
       </div>
     );
@@ -61,7 +61,7 @@ export default function Summertime() {
             </TableColumn>
           ))}
         </TableHeader>
-        <TableBody emptyContent={summerTable()}></TableBody>
+        <TableBody emptyContent={SummerTable}></TableBody>
       </Table>
     </div>
   );
