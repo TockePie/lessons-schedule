@@ -1,25 +1,37 @@
-import { useContext, useState, useEffect, useCallback } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  memo,
+} from "react";
 import {
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  DropdownSection,
   Switch,
   Kbd,
+  Tabs,
+  Tab,
 } from "@nextui-org/react";
 
 import { GroupContext } from "../../context/GroupPlatformInfo";
 import { MobileContext } from "../../context/MobileContext";
-import groupData from "../../data/groupData";
+import { LessonsExamContext } from "../../context/LessonsExamsContext";
+import { groupData, examsData } from "../../data/groupData";
 
-export default function GroupDropdown() {
+const GroupDropdown = memo(function GroupDropdown() {
   const { currentGroup, setCurrentGroup, isPwaZoom, setIsPwaZoom } =
     useContext(GroupContext);
   const { isDesktopOrLaptop, isMobile } = useContext(MobileContext);
+  const { selectedTabKey, setSelectedTabKey } = useContext(LessonsExamContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const handleSelect = useCallback(
+  const handleSelectGroup = useCallback(
     (group) => {
       setCurrentGroup(group);
       localStorage.setItem("group", group);
@@ -30,6 +42,16 @@ export default function GroupDropdown() {
       setIsDropdownOpen(false);
     },
     [setCurrentGroup, setIsPwaZoom]
+  );
+
+  const handleExams = useCallback(
+    (selectedKey) => {
+      window.location.reload();
+      const isExamsNow = selectedKey === "exams";
+      localStorage.setItem("isExams", isExamsNow ? "1" : "0");
+      setSelectedTabKey(selectedKey);
+    },
+    [setSelectedTabKey]
   );
 
   const handlePwaZoom = useCallback(() => {
@@ -49,6 +71,20 @@ export default function GroupDropdown() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const dropdownItems = useMemo(() => {
+    const items = selectedTabKey === "lessons" ? groupData : examsData;
+    return Object.keys(items).map((group) => (
+      <DropdownItem
+        key={group}
+        onClick={() => handleSelectGroup(group)}
+        onTouchEnd={() => handleSelectGroup(group)}
+        textValue={group}
+      >
+        {group}
+      </DropdownItem>
+    ));
+  }, [selectedTabKey, handleSelectGroup]);
+
   return (
     <Dropdown
       className="justify-end"
@@ -57,31 +93,38 @@ export default function GroupDropdown() {
       aria-label="Group Chooser"
     >
       <DropdownTrigger>
-        <Button variant="bordered" color="primary">
+        <Button
+          variant="bordered"
+          color="primary"
+          aria-label="Button for switching group"
+        >
           {currentGroup}
           {isDesktopOrLaptop && <Kbd>Q</Kbd>}
         </Button>
       </DropdownTrigger>
       <DropdownMenu>
-        <DropdownItem>
-          <Switch
-            onValueChange={handlePwaZoom}
-            isSelected={isDesktopOrLaptop && isPwaZoom}
-            isDisabled={!groupData[currentGroup]?.allowPwaZoom || isMobile}
-          >
-            PWA ZOOM
-          </Switch>
-        </DropdownItem>
-        {Object.keys(groupData).map((group) => (
-          <DropdownItem
-            key={group}
-            onClick={() => handleSelect(group)}
-            onTouchEnd={() => handleSelect(group)}
-          >
-            {group}
+        <DropdownSection showDivider>
+          <DropdownItem>
+            <Tabs selectedKey={selectedTabKey} onSelectionChange={handleExams}>
+              <Tab title="Заняття" key="lessons" />
+              <Tab title="Іспити" key="exams" />
+            </Tabs>
           </DropdownItem>
-        ))}
+          <DropdownItem textValue="PWA Zoom Toggle">
+            <Switch
+              size="sm"
+              onValueChange={handlePwaZoom}
+              isSelected={isDesktopOrLaptop && isPwaZoom}
+              isDisabled={!groupData[currentGroup]?.allowPwaZoom || isMobile}
+            >
+              PWA ZOOM
+            </Switch>
+          </DropdownItem>
+        </DropdownSection>
+        {dropdownItems}
       </DropdownMenu>
     </Dropdown>
   );
-}
+});
+
+export default GroupDropdown;

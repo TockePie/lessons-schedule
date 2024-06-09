@@ -9,6 +9,11 @@ import {
   oddLessons as oddLessons35,
 } from "./io-35";
 
+import {
+  GROUP as examGROUP32,
+  exams as exams32,
+} from "./io-32exams";
+
 import IO32Image from "../assets/chat_logo_io-32.jpg";
 import IO35Image from "../assets/chat_logo_io-35.jpg";
 
@@ -29,4 +34,12 @@ const groupData = {
   },
 };
 
-export default groupData;
+const examsData = {
+  "ІО-32": {
+    data: examGROUP32,
+    exams: exams32,
+    allowPwaZoom: true,
+  },
+};
+
+export { groupData, examsData };

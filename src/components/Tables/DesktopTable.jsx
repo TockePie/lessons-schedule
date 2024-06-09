@@ -17,21 +17,24 @@ import openLesson from "../../utils/openLesson.js";
 import { allDays } from "../../utils/getUkrainianWeek.js";
 
 import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
-import groupData from "../../data/groupData.js";
+import { groupData } from "../../data/groupData.js";
 import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
+import { ManualScheduleContext } from "../../context/ManualScheduleContext.jsx";
 
 export default function DesktopTable() {
   const { isPwaZoom, currentGroup } = useContext(GroupContext);
+  const { isManualWeek } = useContext(ManualScheduleContext);
 
   const defineObject = useCallback(
     (rowName) => {
-      const lessonsData = checkWeek()
+      const isOddWeek = isManualWeek ? !checkWeek() : checkWeek();
+      const lessonsData = isOddWeek
         ? groupData[currentGroup]?.oddLessons
         : groupData[currentGroup]?.evenLessons;
 
       return lessonsData ? lessonsData[rowName] : [];
     },
-    [currentGroup]
+    [currentGroup, isManualWeek]
   );
 
   const memoizedTableHeader = useMemo(

@@ -1,26 +1,16 @@
 export default function checkDay() {
-  let currentDay = "";
-
   switch (new Date().getDay()) {
     case 1:
-      currentDay = "mon";
-      break;
+      return "mon";
     case 2:
-      currentDay = "tue";
-      break;
+      return "tue";
     case 3:
-      currentDay = "wed";
-      break;
+      return "wed";
     case 4:
-      currentDay = "thu";
-      break;
+      return "thu";
     case 5:
-      currentDay = "fri";
-      break;
+      return "fri";
     case 6:
-      currentDay = "sat";
-      break;
+      return "sat";
   }
-
-  return currentDay;
 }

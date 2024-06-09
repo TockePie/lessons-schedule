@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/react";
 import GroupDropdown from "./GroupDropdownMenu";
 import WeekInfo from "./WeekInfoText";
 
-import groupData from "../../data/groupData";
+import { groupData } from "../../data/groupData";
 import { GroupContext } from "../../context/GroupPlatformInfo";
 import { MobileContext } from "../../context/MobileContext";
 

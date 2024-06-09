@@ -16,26 +16,29 @@ import checkWeek from "../../utils/checkWeek.js";
 import openLesson from "../../utils/openLesson.js";
 import { currentDay } from "../../utils/getUkrainianWeek.js";
 
-import groupData from "../../data/groupData.js";
+import { groupData } from "../../data/groupData.js";
 import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
 import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
+import { ManualScheduleContext } from "../../context/ManualScheduleContext.jsx";
 
 export default function MobileTable() {
   const { currentGroup } = useContext(GroupContext);
+  const { isManualWeek } = useContext(ManualScheduleContext);
   const screenOrientation = useScreenOrientation();
-
-  const lessonsData = checkWeek()
-    ? groupData[currentGroup]?.oddLessons
-    : groupData[currentGroup]?.evenLessons;
 
   const getLessonsForDay = useCallback(
     (day, rowName) => {
+      const isOddWeek = isManualWeek ? !checkWeek() : checkWeek();
+      const lessonsData = isOddWeek
+        ? groupData[currentGroup]?.oddLessons
+        : groupData[currentGroup]?.evenLessons;
+
       return (
         lessonsData?.[rowName]?.filter((lesson) => lesson.dayOfWeek === day) ||
         []
       );
     },
-    [lessonsData]
+    [currentGroup, isManualWeek]
   );
 
   const orientationValues = useCallback(
@@ -55,24 +58,37 @@ export default function MobileTable() {
   const memorizedTableHeader = useMemo(
     () => (
       <TableHeader>
-        <TableColumn key="lessons" className="max-w-10">
+        <TableColumn
+          key="lessons"
+          className={`${isManualWeek && "bg-red-200 text-slate-900"} max-w-10`}
+        >
           <div className="flex justify-center">Пари</div>
         </TableColumn>
-        <TableColumn>
-          <div className="flex justify-center">{currentDay}</div>
+        <TableColumn
+          className={`${isManualWeek && "bg-red-200 text-slate-900"}`}
+        >
+          <div className="flex justify-center">
+            {new Date().getDay() === 0 ? "Неділя" : currentDay}
+          </div>
         </TableColumn>
       </TableHeader>
     ),
-    []
+    [isManualWeek]
   );
 
   const memorizedTableBody = useMemo(
     () => (
       <TableBody
         emptyContent={
-          <div className="flex flex-col justify-center">
-            <b>Розклад відсутній. Оберіть групу, щоб побачити заняття.</b>
-          </div>
+          new Date().getDay() === 0 ? (
+            <div className="flex flex-col justify-center">
+              <b>Сьогодні неділя. Відпочивайте!</b>
+            </div>
+          ) : (
+            <div className="flex flex-col justify-center">
+              <b>Розклад відсутній. Оберіть групу, щоб побачити заняття.</b>
+            </div>
+          )
         }
       >
         {rowIndices.map(([rowName, time], i) => {
