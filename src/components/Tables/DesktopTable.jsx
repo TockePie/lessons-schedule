@@ -76,7 +76,7 @@ export default function DesktopTable() {
               <TableCell className="min-w-16">
                 <Card
                   aria-label="Time Card"
-                  className="text-nowrap h-32 noselect overflow-hidden"
+                  className="text-nowrap h-[7.8rem] noselect overflow-hidden"
                 >
                   <CardBody>
                     <CardBody className="flex items-center justify-between px-2">
@@ -94,7 +94,7 @@ export default function DesktopTable() {
                       aria-label="Lesson Card"
                       className={`noselect ${
                         lessonTypeToColor[lesson.lessonType]
-                      } h-32 active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
+                      } h-[7.8rem] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
                       isPressable
                       onPress={() => openLesson(lesson, isPwaZoom)}
                     >

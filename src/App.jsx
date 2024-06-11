@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes";
 
 import Header from "./components/Header/Header";
-import WeekTabs from "./components/WeekTabs";
+// import WeekTabs from "./components/WeekTabs";
 import LessonsTable from "./components/Tables/Table";
 
 import { GroupProvider } from "./context/GroupPlatformInfo";
@@ -31,7 +31,7 @@ function MainContent() {
   return (
     <>
       <Header />
-      <WeekTabs />
+      {/* <WeekTabs /> */}
       <LessonsTable />
     </>
   );
