@@ -9,6 +9,7 @@ import {
   TableRow,
   Card,
   CardBody,
+  Switch,
   useDisclosure,
 } from "@nextui-org/react";
 
@@ -17,6 +18,7 @@ import ModalDialog from "../ModalDialog.jsx";
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
 import openLesson from "../../utils/openLesson.js";
+import getWeekText from "../../utils/getWeekText.js";
 import { allDays } from "../../utils/getUkrainianWeek.js";
 
 import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
@@ -31,7 +33,7 @@ export default function DesktopTable() {
     url: "",
   });
   const { isPwaZoom, currentGroup } = useContext(GroupContext);
-  const { isManualWeek } = useContext(ManualScheduleContext);
+  const { isManualWeek, setIsManualWeek } = useContext(ManualScheduleContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const defineObject = useCallback(
@@ -57,11 +59,23 @@ export default function DesktopTable() {
     [isPwaZoom, onOpen]
   );
 
+  const handleSelectionChange = useCallback(() => {
+    setIsManualWeek((prev) => !prev);
+  }, [setIsManualWeek]);
+
   const memoizedTableHeader = useMemo(
     () => (
       <TableHeader columns={allDays}>
         <TableColumn key="lessons" className="max-w-10">
-          <div className="flex justify-center">Пари</div>
+          <div className="flex justify-center text-sm">
+            <Switch
+              color="secondary"
+              size="sm"
+              onValueChange={handleSelectionChange}
+            >
+              {getWeekText("mobile", !checkWeek())}
+            </Switch>
+          </div>
         </TableColumn>
         {allDays.map((day) => (
           <TableColumn
@@ -75,7 +89,7 @@ export default function DesktopTable() {
         ))}
       </TableHeader>
     ),
-    []
+    [handleSelectionChange]
   );
 
   const memoizedTableBody = useMemo(

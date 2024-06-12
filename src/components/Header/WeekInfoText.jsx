@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useContext } from "react";
 
 import checkWeek from "../../utils/checkWeek";
+import getWeekText from "../../utils/getWeekText";
 import { LessonsExamContext } from "../../context/LessonsExamsContext";
 
 const examText = (screen) => {
@@ -9,17 +10,6 @@ const examText = (screen) => {
       return "Розклад іспитів";
     case "mobile":
       return "Іспити";
-    default:
-      return "";
-  }
-};
-
-const getWeekText = (screen, isOdd) => {
-  switch (screen) {
-    case "desktop":
-      return isOdd ? "Непарний тиждень: розклад" : "Парний тиждень: розклад";
-    case "mobile":
-      return isOdd ? "Непарний" : "Парний";
     default:
       return "";
   }
