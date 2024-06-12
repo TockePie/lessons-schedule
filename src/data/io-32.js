@@ -15,7 +15,7 @@ export const evenLessons = {
       lessonType: "lecture",
       teacher: "Новотарський М.А.",
       url: "https://us02web.zoom.us/j/87578307057?pwd=UGwyVGlwc3M4Q0Q0Q0NLWUt6bmVpUT09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/87578307057/join?pwd=UGwyVGlwc3M4Q0Q0Q0NLWUt6bmVpUT09&fromPWA=1",
     },
     {
@@ -28,7 +28,7 @@ export const evenLessons = {
       lessonType: "lab",
       teacher: "Ляховецький В.Р.",
       url: "https://us04web.zoom.us/j/76362666471?pwd=bDVWbTRRdTIwT3h4RCszcEhOWDQ0QT09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/76362666471/join?pwd=bDVWbTRRdTIwT3h4RCszcEhOWDQ0QT09&fromPWA=1",
     },
     {
@@ -37,7 +37,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Новицький Ю.В.",
       url: "https://zoom.us/j/98105710510?pwd=QWltN0NnTm1yNGttTHVaQVVqdHVrdz09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/98105710510/join?pwd=QWltN0NnTm1yNGttTHVaQVVqdHVrdz09&fromPWA=1",
     },
     {
@@ -46,7 +46,7 @@ export const evenLessons = {
       lessonType: "lecture",
       teacher: "Русаков В.Ф.",
       url: "https://meet.google.com/mie-rrfc-aeo?hs=151",
-      urlPWA: "https://meet.google.com/mie-rrfc-aeo?hs=151",
+      urlPwa: "https://meet.google.com/mie-rrfc-aeo?hs=151",
     },
     {
       dayOfWeek: "sat",
@@ -59,20 +59,18 @@ export const evenLessons = {
       lessonName: "Вища математика",
       lessonType: "lecture",
       teacher: "Голіченко І.І.",
-      url: () => {
-        const password = "C2qR3w";
-        alert(`Після відкриття посилання вставте пароль:
-        ${password} (натисніть ОК для копіювання)`);
-        navigator.clipboard.writeText(password);
-        window.open("https://us02web.zoom.us/j/8067850314", "_blank");
+      url: {
+        password: "C2qR3w",
+        url: "https://us02web.zoom.us/j/8067850314",
+        needDialog: true,
+        textInDialog: "Після відкриття посилання вставте пароль",
       },
-      urlPWA: () => {
-        const password = "C2qR3w";
-        alert(`Після відкриття посилання вставте пароль:
-        ${password} (натисніть ОК для копіювання)`);
-        navigator.clipboard.writeText(password);
-        window.open("https://app.zoom.us/wc/8067850314/join", "_blank");
-      },
+      urlPwa: {
+        password: "C2qR3w",
+        url: "https://app.zoom.us/wc/8067850314/join",
+        needDialog: true,
+        textInDialog: "Після відкриття посилання вставте пароль",
+      }
     },
     {
       dayOfWeek: "tue",
@@ -84,7 +82,7 @@ export const evenLessons = {
       lessonType: "lab",
       teacher: "Пономаренко А.М.",
       url: "https://us05web.zoom.us/j/7089075754?pwd=TWRlZmxyVlFiTWU1UGlVVU1XcFE0Zz09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/7089075754/join?pwd=TWRlZmxyVlFiTWU1UGlVVU1XcFE0Zz09&fromPWA=1",
     },
     {
@@ -93,7 +91,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Рускаов В.Ф.",
       url: "https://meet.google.com/mie-rrfc-aeo?hs=151",
-      urlPWA: "https://meet.google.com/mie-rrfc-aeo?hs=151",
+      urlPwa: "https://meet.google.com/mie-rrfc-aeo?hs=151",
     },
     {
       dayOfWeek: "fri",
@@ -101,7 +99,7 @@ export const evenLessons = {
       lessonType: "lecture",
       teacher: "Жабін В.І.",
       url: "https://bbb.comsys.kpi.ua/rooms/vqj-umt-tas-leo/join",
-      urlPWA: "https://bbb.comsys.kpi.ua/rooms/vqj-umt-tas-leo/join",
+      urlPwa: "https://bbb.comsys.kpi.ua/rooms/vqj-umt-tas-leo/join",
     },
     {
       dayOfWeek: "sat",
@@ -119,7 +117,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Поліщук А.Ю.",
       url: "https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/2530562585/join?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09&fromPWA=1",
     },
     {
@@ -128,7 +126,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Гаєва П.О.",
       url: "https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
-      urlPWA: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
+      urlPwa: "https://app.zoom.us/wc/2114671234/join?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09",
     },
     {
       dayOfWeek: "thu",
@@ -136,7 +134,7 @@ export const evenLessons = {
       lessonType: "lab",
       teacher: "Верба О.А.",
       url: "https://us04web.zoom.us/j/7382214783?pwd=RnZ3SWgwK1JoVkZtNndnKzdPZjFGdz09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/7382214783/join?pwd=RnZ3SWgwK1JoVkZtNndnKzdPZjFGdz09&fromPWA=1",
     },
     {
@@ -145,7 +143,7 @@ export const evenLessons = {
       lessonType: "lecture",
       teacher: "Алещенко О.В.",
       url: "https://us02web.zoom.us/j/2711546637?pwd=Ry82RHp3SjV6WTZRMXl6WUNod25hUT09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/2711546637/join?pwd=Ry82RHp3SjV6WTZRMXl6WUNod25hUT09&fromPWA=1",
     },
     {
@@ -164,7 +162,7 @@ export const evenLessons = {
       lessonType: "practice",
       teacher: "Онуфрієнко О.П.",
       url: "https://us05web.zoom.us/j/89608497213?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/89608497213/join?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1&fromPWA=1",
     },
     {
@@ -202,7 +200,7 @@ export const oddLessons = {
       lessonType: "lab",
       teacher: "Алещенко О.В.",
       url: "https://us02web.zoom.us/j/2711546637?pwd=Ry82RHp3SjV6WTZRMXl6WUNod25hUT09",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/2711546637/join?pwd=Ry82RHp3SjV6WTZRMXl6WUNod25hUT09&fromPWA=1",
     },
     ...evenLessons.thirdLessonsRow.slice(4, 6),
@@ -214,7 +212,7 @@ export const oddLessons = {
       lessonType: "lecture",
       teacher: "Онуфрієнко О.П.",
       url: "https://us05web.zoom.us/j/89608497213?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1",
-      urlPWA:
+      urlPwa:
         "https://app.zoom.us/wc/89608497213/join?pwd=BWO53tgq9zTWe8IZyI7hh3bqhtihyK.1&fromPWA=1",
     },
     {

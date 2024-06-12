@@ -1,4 +1,4 @@
-import { useContext, useMemo, useCallback } from "react";
+import { useContext, useMemo, useCallback, useState } from "react";
 
 import {
   Table,
@@ -9,7 +9,10 @@ import {
   TableRow,
   Card,
   CardBody,
+  useDisclosure,
 } from "@nextui-org/react";
+
+import ModalDialog from "../ModalDialog.jsx";
 
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
@@ -22,8 +25,14 @@ import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
 import { ManualScheduleContext } from "../../context/ManualScheduleContext.jsx";
 
 export default function DesktopTable() {
+  const [modalData, setModalData] = useState({
+    textInDialog: "",
+    password: "",
+    url: "",
+  });
   const { isPwaZoom, currentGroup } = useContext(GroupContext);
   const { isManualWeek } = useContext(ManualScheduleContext);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const defineObject = useCallback(
     (rowName) => {
@@ -35,6 +44,17 @@ export default function DesktopTable() {
       return lessonsData ? lessonsData[rowName] : [];
     },
     [currentGroup, isManualWeek]
+  );
+
+  const handlePress = useCallback(
+    (lesson) => {
+      const opening = openLesson(lesson, isPwaZoom);
+      if (opening) {
+        setModalData(opening);
+        onOpen();
+      }
+    },
+    [isPwaZoom, onOpen]
   );
 
   const memoizedTableHeader = useMemo(
@@ -96,7 +116,7 @@ export default function DesktopTable() {
                         lessonTypeToColor[lesson.lessonType]
                       } h-[7.8rem] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
                       isPressable
-                      onPress={() => openLesson(lesson, isPwaZoom)}
+                      onPress={() => handlePress(lesson)}
                     >
                       <CardBody className="flex items-center justify-center overflow-hidden">
                         <b className="mt-auto mb-auto text-center text-xl p-2">
@@ -113,7 +133,7 @@ export default function DesktopTable() {
         })}
       </TableBody>
     ),
-    [currentGroup, isPwaZoom, defineObject]
+    [currentGroup, defineObject, handlePress]
   );
 
   return (
@@ -122,6 +142,7 @@ export default function DesktopTable() {
         {memoizedTableHeader}
         {memoizedTableBody}
       </Table>
+      <ModalDialog isOpen={isOpen} onClose={onClose} data={modalData} />
     </div>
   );
 }

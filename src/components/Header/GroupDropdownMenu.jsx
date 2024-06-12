@@ -92,7 +92,7 @@ const GroupDropdown = memo(function GroupDropdown() {
       onOpenChange={setIsDropdownOpen}
       aria-label="Group Chooser"
     >
-      <DropdownTrigger>
+      <DropdownTrigger aria-label="Button to choose group">
         <Button
           variant="bordered"
           color="primary"
@@ -102,9 +102,9 @@ const GroupDropdown = memo(function GroupDropdown() {
           {isDesktopOrLaptop && <Kbd>Q</Kbd>}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu>
+      <DropdownMenu aria-label="list of groups">
         <DropdownSection showDivider>
-          <DropdownItem>
+          <DropdownItem textValue="Tabs for lessons and exams">
             <Tabs selectedKey={selectedTabKey} onSelectionChange={handleExams}>
               <Tab title="Заняття" key="lessons" />
               <Tab title="Іспити" key="exams" />

@@ -7,19 +7,17 @@ export const exams = [
     lessonName: "Вища математика",
     lessonType: "lecture",
     teacher: "Голіченко І.І.",
-    url: () => {
-      const password = "C2qR3w";
-      alert(`Після відкриття посилання вставте пароль:
-        ${password} (натисніть ОК для копіювання)`);
-      navigator.clipboard.writeText(password);
-      window.open("https://us02web.zoom.us/j/8067850314", "_blank");
+    url: {
+      password: "C2qR3w",
+      url: "https://us02web.zoom.us/j/8067850314",
+      needDialog: true,
+      textInDialog: "Після відкриття посилання вставте пароль",
     },
-    urlPWA: () => {
-      const password = "C2qR3w";
-      alert(`Після відкриття посилання вставте пароль:
-        ${password} (натисніть ОК для копіювання)`);
-      navigator.clipboard.writeText(password);
-      window.open("https://app.zoom.us/wc/8067850314/join", "_blank");
+    urlPwa: {
+      password: "C2qR3w",
+      url: "https://app.zoom.us/wc/8067850314/join",
+      needDialog: true,
+      textInDialog: "Після відкриття посилання вставте пароль",
     },
   },
   {

@@ -68,7 +68,7 @@ export default function MobileTable() {
           className={`${isManualWeek && "bg-red-200 text-slate-900"}`}
         >
           <div className="flex justify-center">
-            {new Date().getDay() === 0 ? "Неділя" : currentDay}
+            {new Date().getDay() === 0 ? "Неділя" : currentDay()}
           </div>
         </TableColumn>
       </TableHeader>

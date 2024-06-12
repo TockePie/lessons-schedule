@@ -9,27 +9,21 @@ const allDays = [
   { key: "sat", label: "Субота" },
 ];
 
-let currentDay;
-
-switch (checkDay()) {
-  case "mon":
-    currentDay = "Понеділок";
-    break;
-  case "tue":
-    currentDay = "Вівторок";
-    break;
-  case "wed":
-    currentDay = "Середа";
-    break;
-  case "thu":
-    currentDay = "Четвер";
-    break;
-  case "fri":
-    currentDay = "П'ятниця";
-    break;
-  case "sat":
-    currentDay = "Субота";
-    break;
-}
+const currentDay = () => {
+  switch (checkDay()) {
+    case "mon":
+      return "Понеділок";
+    case "tue":
+      return "Вівторок";
+    case "wed":
+      return "Середа";
+    case "thu":
+      return "Четвер";
+    case "fri":
+      return "П'ятниця";
+    case "sat":
+      return "Субота";
+  }
+};
 
 export { currentDay, allDays };

@@ -1,5 +1,5 @@
 import { useContext, useCallback } from "react";
-import { Button } from "@nextui-org/react";
+import { Switch } from "@nextui-org/react";
 
 import { ManualScheduleContext } from "../context/ManualScheduleContext";
 import { LessonsExamContext } from "../context/LessonsExamsContext";
@@ -15,16 +15,10 @@ export default function WeekTabs() {
   if (selectedTabKey === "exams") return null;
 
   return (
-    // <Tabs
-    //   className="flex items-center justify-center mt-3"
-    //   defaultSelectedKey={checkWeek() ? "odd" : "even"}
-    //   onSelectionChange={handleSelectionChange}
-    // >
-    //   <Tab title="Парний" key="even" />
-    //   <Tab title="Непарний" key="odd" />
-    // </Tabs>
     <div className="flex items-center justify-center mt-3">
-      <Button onClick={handleSelectionChange}>Інший тиждень</Button>
+      <Switch color="secondary" onValueChange={handleSelectionChange}>
+        Інший тиждень
+      </Switch>
     </div>
   );
 }
