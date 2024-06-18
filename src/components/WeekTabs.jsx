@@ -1,16 +1,17 @@
-import { useContext, useCallback } from "react";
+import { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Switch } from "@nextui-org/react";
 
-import { ManualScheduleContext } from "../context/ManualScheduleContext";
-import { LessonsExamContext } from "../context/LessonsExamsContext";
+import { setIsManualWeek } from "../store/manualSchedule";
 
 export default function WeekTabs() {
-  const { setIsManualWeek } = useContext(ManualScheduleContext);
-  const { selectedTabKey } = useContext(LessonsExamContext);
+  const { selectedTabKey } = useSelector((state) => state.lessonsExam);
+
+  const dispatch = useDispatch();
 
   const handleSelectionChange = useCallback(() => {
-    setIsManualWeek((prev) => !prev);
-  }, [setIsManualWeek]);
+    dispatch(setIsManualWeek((prev) => !prev));
+  }, [dispatch]);
 
   if (selectedTabKey === "exams") return null;
 

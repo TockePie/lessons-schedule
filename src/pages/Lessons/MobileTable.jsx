@@ -1,4 +1,5 @@
-import { useContext, Fragment, useMemo, useCallback } from "react";
+import { Fragment, useMemo, useCallback, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import useScreenOrientation from "react-hook-screen-orientation";
 import {
   Card,
@@ -9,22 +10,36 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Switch,
+  useDisclosure,
 } from "@nextui-org/react";
+
+import ModalDialog from "../../components/ModalDialog.jsx";
 
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
+import getWeekText from "../../utils/getWeekText.js";
 import openLesson from "../../utils/openLesson.js";
 import { currentDay } from "../../utils/getUkrainianWeek.js";
+import { setIsManualWeek } from "../../store/manualSchedule.js";
 
 import { groupData } from "../../data/groupData.js";
 import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
-import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
-import { ManualScheduleContext } from "../../context/ManualScheduleContext.jsx";
 
 export default function MobileTable() {
-  const { currentGroup } = useContext(GroupContext);
-  const { isManualWeek } = useContext(ManualScheduleContext);
+  const [modalData, setModalData] = useState({
+    textInDialog: "",
+    password: "",
+    url: "",
+  });
+  const { currentGroup } = useSelector((state) => state.group);
+  const isManualWeek = useSelector(
+    (state) => state.manualSchedule.isManualWeek
+  );
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const screenOrientation = useScreenOrientation();
+
+  const dispatch = useDispatch();
 
   const getLessonsForDay = useCallback(
     (day, rowName) => {
@@ -41,6 +56,17 @@ export default function MobileTable() {
     [currentGroup, isManualWeek]
   );
 
+  const handlePress = useCallback(
+    (lesson) => {
+      const opening = openLesson(lesson, false);
+      if (opening) {
+        setModalData(opening);
+        onOpen();
+      }
+    },
+    [onOpen]
+  );
+
   const orientationValues = useCallback(
     (special, defaultValue) => {
       switch (screenOrientation) {
@@ -55,25 +81,33 @@ export default function MobileTable() {
     [screenOrientation]
   );
 
+  const handleSelectionChange = useCallback(() => {
+    dispatch(setIsManualWeek(!isManualWeek));
+  }, [dispatch, isManualWeek]);
+
   const memorizedTableHeader = useMemo(
     () => (
       <TableHeader>
-        <TableColumn
-          key="lessons"
-          className={`${isManualWeek && "bg-red-200 text-slate-900"} max-w-10`}
-        >
-          <div className="flex justify-center">Пари</div>
+        <TableColumn key="lessons">
+          <div className="flex justify-center text-sm">
+            <Switch
+              color="secondary"
+              size="sm"
+              checked={isManualWeek}
+              onChange={handleSelectionChange}
+            >
+              {getWeekText("mobile", !checkWeek())}
+            </Switch>
+          </div>
         </TableColumn>
-        <TableColumn
-          className={`${isManualWeek && "bg-red-200 text-slate-900"}`}
-        >
+        <TableColumn>
           <div className="flex justify-center">
             {new Date().getDay() === 0 ? "Неділя" : currentDay()}
           </div>
         </TableColumn>
       </TableHeader>
     ),
-    [isManualWeek]
+    [isManualWeek, handleSelectionChange]
   );
 
   const memorizedTableBody = useMemo(
@@ -131,7 +165,7 @@ export default function MobileTable() {
                         lessonTypeToColor[lesson.lessonType]
                       } ${orientationValues("h-[34vh]", "h-[17vh]")}`}
                         isPressable
-                        onPress={() => openLesson(lesson, false)}
+                        onPress={() => handlePress(lesson)}
                       >
                         <CardBody className="flex items-center justify-center overflow-hidden">
                           <b className="mt-auto mb-auto text-center text-xl p-2">
@@ -149,7 +183,7 @@ export default function MobileTable() {
         })}
       </TableBody>
     ),
-    [currentGroup, getLessonsForDay, orientationValues]
+    [currentGroup, getLessonsForDay, orientationValues, handlePress]
   );
 
   return (
@@ -158,6 +192,7 @@ export default function MobileTable() {
         {memorizedTableHeader}
         {memorizedTableBody}
       </Table>
+      <ModalDialog isOpen={isOpen} onClose={onClose} data={modalData} />
     </div>
   );
 }

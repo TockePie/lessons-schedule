@@ -1,4 +1,5 @@
-import { useContext, useMemo, useCallback, useState } from "react";
+import { useMemo, useCallback, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Table,
@@ -13,18 +14,17 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import ModalDialog from "../ModalDialog.jsx";
+import ModalDialog from "../../components/ModalDialog.jsx";
 
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
 import openLesson from "../../utils/openLesson.js";
 import getWeekText from "../../utils/getWeekText.js";
 import { allDays } from "../../utils/getUkrainianWeek.js";
+import { setIsManualWeek } from "../../store/manualSchedule.js";
 
 import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
 import { groupData } from "../../data/groupData.js";
-import { GroupContext } from "../../context/GroupPlatformInfo.jsx";
-import { ManualScheduleContext } from "../../context/ManualScheduleContext.jsx";
 
 export default function DesktopTable() {
   const [modalData, setModalData] = useState({
@@ -32,9 +32,14 @@ export default function DesktopTable() {
     password: "",
     url: "",
   });
-  const { isPwaZoom, currentGroup } = useContext(GroupContext);
-  const { isManualWeek, setIsManualWeek } = useContext(ManualScheduleContext);
+  const { currentGroup } = useSelector((state) => state.group);
+  const { isPwaZoom } = useSelector((state) => state.zoom);
+  const isManualWeek = useSelector(
+    (state) => state.manualSchedule.isManualWeek
+  );
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const dispatch = useDispatch();
 
   const defineObject = useCallback(
     (rowName) => {
@@ -60,8 +65,8 @@ export default function DesktopTable() {
   );
 
   const handleSelectionChange = useCallback(() => {
-    setIsManualWeek((prev) => !prev);
-  }, [setIsManualWeek]);
+    dispatch(setIsManualWeek(!isManualWeek));
+  }, [dispatch, isManualWeek]);
 
   const memoizedTableHeader = useMemo(
     () => (
@@ -71,7 +76,8 @@ export default function DesktopTable() {
             <Switch
               color="secondary"
               size="sm"
-              onValueChange={handleSelectionChange}
+              checked={isManualWeek}
+              onChange={handleSelectionChange}
             >
               {getWeekText("mobile", !checkWeek())}
             </Switch>
@@ -89,7 +95,7 @@ export default function DesktopTable() {
         ))}
       </TableHeader>
     ),
-    [handleSelectionChange]
+    [isManualWeek, handleSelectionChange]
   );
 
   const memoizedTableBody = useMemo(

@@ -1,12 +1,12 @@
 import { useContext, useMemo } from "react";
 import { Table, TableBody, TableColumn, TableHeader } from "@nextui-org/react";
 
-import checkDay from "../../utils/checkDay.js";
-import { allDays, currentDay } from "../../utils/getUkrainianWeek.js";
+import checkDay from "../utils/checkDay.js";
+import { allDays, currentDay } from "../utils/getUkrainianWeek.js";
 
-import { MobileContext } from "../../context/MobileContext";
+import { MobileContext } from "../store/MobileContext.jsx";
 
-import sunInSunglasses from "../../assets/sun_in_sunglasses.png";
+import sunInSunglasses from "../assets/sun_in_sunglasses.png";
 
 export default function Summertime() {
   const { isMobile } = useContext(MobileContext);
@@ -19,8 +19,12 @@ export default function Summertime() {
           alt="sun"
           className="mx-auto mt-10 w-60 h-60"
         />
-        <b className="mb-2 text-gray-800 dark:text-gray-100 just-me-again-down-here-regular">It&apos;s summertime!</b>
-        <a className="mb-8 dark:text-gray-500">Відпочивайте та насолоджуйтесь літом!</a>
+        <b className="mb-2 text-gray-800 dark:text-gray-100 just-me-again-down-here-regular">
+          It&apos;s summertime!
+        </b>
+        <a className="mb-8 dark:text-gray-500">
+          Відпочивайте та насолоджуйтесь літом!
+        </a>
       </div>
     );
   }, []);

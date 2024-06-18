@@ -1,10 +1,12 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
-  useContext,
   useState,
   useEffect,
   useCallback,
   useMemo,
   memo,
+  useContext,
 } from "react";
 import {
   Button,
@@ -19,46 +21,60 @@ import {
   Tab,
 } from "@nextui-org/react";
 
-import { GroupContext } from "../../context/GroupPlatformInfo";
-import { MobileContext } from "../../context/MobileContext";
-import { LessonsExamContext } from "../../context/LessonsExamsContext";
+import { setCurrentGroup } from "../../store/group";
+import { setIsPwaZoom } from "../../store/zoom";
 import { groupData, examsData } from "../../data/groupData";
+import { MobileContext } from "../../store/MobileContext";
 
 const GroupDropdown = memo(function GroupDropdown() {
-  const { currentGroup, setCurrentGroup, isPwaZoom, setIsPwaZoom } =
-    useContext(GroupContext);
-  const { isDesktopOrLaptop, isMobile } = useContext(MobileContext);
-  const { selectedTabKey, setSelectedTabKey } = useContext(LessonsExamContext);
+  const { currentGroup } = useSelector((state) => state.group);
+  const { isPwaZoom } = useSelector((state) => state.zoom);
+  const { isMobile, isDesktopOrLaptop } = useContext(MobileContext);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedTabKey, setSelectedTabKey] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setSelectedTabKey("lessons");
+    } else if (location.pathname === "/exams") {
+      setSelectedTabKey("exams");
+    }
+  }, [location.pathname]);
 
   const handleSelectGroup = useCallback(
     (group) => {
-      setCurrentGroup(group);
-      localStorage.setItem("group", group);
+      dispatch(setCurrentGroup(group));
       if (!groupData[group].allowPwaZoom) {
-        setIsPwaZoom(false);
-        localStorage.setItem("isPwaZoom", "0");
+        dispatch(setIsPwaZoom(false));
       }
       setIsDropdownOpen(false);
     },
-    [setCurrentGroup, setIsPwaZoom]
+    [dispatch, setIsDropdownOpen]
   );
 
   const handleExams = useCallback(
     (selectedKey) => {
-      window.location.reload();
-      const isExamsNow = selectedKey === "exams";
-      localStorage.setItem("isExams", isExamsNow ? "1" : "0");
-      setSelectedTabKey(selectedKey);
+      switch (selectedKey) {
+        case "lessons":
+          navigate("/");
+          break;
+        case "exams":
+          navigate("/exams");
+          break;
+      }
     },
-    [setSelectedTabKey]
+    [navigate]
   );
 
   const handlePwaZoom = useCallback(() => {
     const newState = !isPwaZoom;
-    setIsPwaZoom(newState);
+    dispatch(setIsPwaZoom(newState));
     localStorage.setItem("isPwaZoom", newState ? "1" : "0");
-  }, [isPwaZoom, setIsPwaZoom]);
+  }, [isPwaZoom, dispatch]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {

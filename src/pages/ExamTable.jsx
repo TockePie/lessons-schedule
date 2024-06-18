@@ -1,4 +1,5 @@
-import { useCallback, useContext, useMemo, memo } from "react";
+import { useCallback, useMemo, memo } from "react";
+import { useSelector } from "react-redux";
 import {
   Card,
   CardBody,
@@ -9,12 +10,18 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import openLesson from "../../utils/openLesson";
-import { examsData } from "../../data/groupData";
-import { GroupContext } from "../../context/GroupPlatformInfo";
+
+import Summertime from "./Summertime";
+
+import openLesson from "../utils/openLesson";
+import getDate from "../utils/getDate";
+
+import { examsData } from "../data/groupData";
 
 const ExamTable = () => {
-  const { currentGroup, isPwaZoom } = useContext(GroupContext);
+  const { currentGroup } = useSelector((state) => state.group);
+  const { isPwaZoom } = useSelector((state) => state.zoom);
+  const dayOfYear = getDate();
 
   const exams = useMemo(() => examsData[currentGroup]?.exams, [currentGroup]);
 
@@ -24,6 +31,10 @@ const ExamTable = () => {
     },
     [isPwaZoom]
   );
+
+  if (dayOfYear > 175 && dayOfYear < 244) {
+    return <Summertime />;
+  }
 
   return (
     <div className="mx-auto my-8 max-w-[25rem]">
