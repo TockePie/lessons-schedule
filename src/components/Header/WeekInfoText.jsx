@@ -22,10 +22,10 @@ export default function WeekInfo(props) {
 
   useEffect(() => {
     switch (location.pathname) {
-      case "/":
+      case "/lessons-schedule":
         setWeekText(getWeekText(props.screen, isOddWeek));
         break;
-      case "/exams":
+      case "/lessons-schedule/exams":
         setWeekText(examText(props.screen));
         break;
       default:

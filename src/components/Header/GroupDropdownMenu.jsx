@@ -34,13 +34,13 @@ const GroupDropdown = memo(function GroupDropdown() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedTabKey, setSelectedTabKey] = useState("");
+  const [selectedTabKey, setSelectedTabKey] = useState("/lessons-schedule");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/lessons-schedule") {
       setSelectedTabKey("lessons");
-    } else if (location.pathname === "/exams") {
+    } else if (location.pathname === "/lessons-schedule/exams") {
       setSelectedTabKey("exams");
     }
   }, [location.pathname]);
@@ -60,10 +60,10 @@ const GroupDropdown = memo(function GroupDropdown() {
     (selectedKey) => {
       switch (selectedKey) {
         case "lessons":
-          navigate("/");
+          navigate("/lessons-schedule");
           break;
         case "exams":
-          navigate("/exams");
+          navigate("/lessons-schedule/exams");
           break;
       }
     },
