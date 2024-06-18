@@ -19,19 +19,18 @@ export default function WeekInfo(props) {
   const isOddWeek = useMemo(checkWeek, []);
   const [weekText, setWeekText] = useState("");
   const location = useLocation();
+  const pathname = location.pathname.replace(/\/$/, '');
 
   useEffect(() => {
-    switch (location.pathname) {
+    switch (pathname) {
       case "/lessons-schedule":
         setWeekText(getWeekText(props.screen, isOddWeek));
         break;
       case "/lessons-schedule/exams":
         setWeekText(examText(props.screen));
         break;
-      default:
-        break;
     }
-  }, [isOddWeek, location.pathname, props.screen]);
+  }, [isOddWeek, pathname, props.screen]);
 
   return <b className={`p-3 text-2xl ${props.className}`}>{weekText}</b>;
 }

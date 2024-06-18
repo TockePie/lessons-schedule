@@ -34,16 +34,17 @@ const GroupDropdown = memo(function GroupDropdown() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const pathname = location.pathname.replace(/\/$/, '');
   const [selectedTabKey, setSelectedTabKey] = useState("/lessons-schedule");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/lessons-schedule") {
+    if (pathname === "/lessons-schedule") {
       setSelectedTabKey("lessons");
-    } else if (location.pathname === "/lessons-schedule/exams") {
+    } else if (pathname === "/lessons-schedule/exams") {
       setSelectedTabKey("exams");
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   const handleSelectGroup = useCallback(
     (group) => {
