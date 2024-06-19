@@ -1,0 +1,43 @@
+.main {
+  @apply flex 
+    flex-col 
+    gap-6 
+    items-center 
+    justify-center;
+}
+
+.text {
+  @apply flex 
+    flex-col 
+    items-center 
+    justify-center 
+    mt-32;
+
+  h1 {
+    @apply text-4xl 
+    font-black;
+  }
+
+  p {
+    @apply flex 
+    text-2xl 
+    text-center 
+    p-5;
+  }
+}
+
+.cards {
+  @apply grid 
+  grid-cols-1 
+  md:grid-cols-2 
+  gap-5 
+  max-w-96;
+
+  b {
+    @apply mt-auto 
+    mb-auto 
+    text-center 
+    text-xl 
+    p-2;
+  }
+}

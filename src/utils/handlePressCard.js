@@ -20,4 +20,12 @@ const openLesson = (lesson, isPwaZoom) => {
   }
 };
 
-export default openLesson;
+const handlePress = (lesson, isPwaZoom, setModalData, onOpen) => {
+  const opening = openLesson(lesson, isPwaZoom);
+  if (opening) {
+    setModalData(opening);
+    onOpen();
+  }
+};
+
+export default handlePress;

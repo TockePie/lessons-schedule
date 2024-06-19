@@ -16,15 +16,16 @@ import {
 
 import ModalDialog from "../../components/ModalDialog.jsx";
 
+import handlePress from "../../utils/handlePressCard.js";
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
 import getWeekText from "../../utils/getWeekText.js";
-import openLesson from "../../utils/openLesson.js";
+import getLessonColor from "../../utils/getLessonColor.js";
 import { currentDay } from "../../utils/getUkrainianWeek.js";
-import { setIsManualWeek } from "../../store/manualSchedule.js";
+import { switchWeeks } from "../../store/manualSchedule.js";
 
 import { groupData } from "../../data/groupData.js";
-import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
+import { rowIndices } from "../../common/constants.js";
 
 export default function MobileTable() {
   const [modalData, setModalData] = useState({
@@ -56,14 +57,8 @@ export default function MobileTable() {
     [currentGroup, isManualWeek]
   );
 
-  const handlePress = useCallback(
-    (lesson) => {
-      const opening = openLesson(lesson, false);
-      if (opening) {
-        setModalData(opening);
-        onOpen();
-      }
-    },
+  const handlePressCallback = useCallback(
+    (lesson) => handlePress(lesson, false, setModalData, onOpen),
     [onOpen]
   );
 
@@ -82,8 +77,8 @@ export default function MobileTable() {
   );
 
   const handleSelectionChange = useCallback(() => {
-    dispatch(setIsManualWeek(!isManualWeek));
-  }, [dispatch, isManualWeek]);
+    dispatch(switchWeeks());
+  }, [dispatch]);
 
   const memorizedTableHeader = useMemo(
     () => (
@@ -161,11 +156,11 @@ export default function MobileTable() {
                       hover:bg-zinc-200 
                       dark:active:bg-zinc-800 
                       dark:hover:bg-zinc-700 
-                      cursor-pointer border-1 w-full ${
-                        lessonTypeToColor[lesson.lessonType]
-                      } ${orientationValues("h-[34vh]", "h-[17vh]")}`}
+                      cursor-pointer border-1 w-full ${getLessonColor(
+                        lesson.lessonType
+                      )} ${orientationValues("h-[34vh]", "h-[17vh]")}`}
                         isPressable
-                        onPress={() => handlePress(lesson)}
+                        onPress={() => handlePressCallback(lesson)}
                       >
                         <CardBody className="flex items-center justify-center overflow-hidden">
                           <b className="mt-auto mb-auto text-center text-xl p-2">
@@ -183,7 +178,7 @@ export default function MobileTable() {
         })}
       </TableBody>
     ),
-    [currentGroup, getLessonsForDay, orientationValues, handlePress]
+    [currentGroup, getLessonsForDay, orientationValues, handlePressCallback]
   );
 
   return (

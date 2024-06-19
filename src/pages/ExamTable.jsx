@@ -1,4 +1,4 @@
-import { useCallback, useMemo, memo } from "react";
+import { useState, useCallback, useMemo, memo } from "react";
 import { useSelector } from "react-redux";
 import {
   Card,
@@ -9,27 +9,33 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  useDisclosure,
 } from "@nextui-org/react";
 
 import Summertime from "./Summertime";
+import ModalDialog from "../components/ModalDialog";
 
-import openLesson from "../utils/openLesson";
+import handlePress from "../utils/handlePressCard";
 import getDate from "../utils/getDate";
 
 import { examsData } from "../data/groupData";
 
 const ExamTable = () => {
+  const [modalData, setModalData] = useState({
+    textInDialog: "",
+    password: "",
+    url: "",
+  });
   const { currentGroup } = useSelector((state) => state.group);
   const { isPwaZoom } = useSelector((state) => state.zoom);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dayOfYear = getDate();
 
   const exams = useMemo(() => examsData[currentGroup]?.exams, [currentGroup]);
 
-  const handlePress = useCallback(
-    (exam) => {
-      openLesson(exam, isPwaZoom);
-    },
-    [isPwaZoom]
+  const handlePressCallback = useCallback(
+    (lesson) => handlePress(lesson, isPwaZoom, setModalData, onOpen),
+    [isPwaZoom, onOpen]
   );
 
   if (dayOfYear > 175 && dayOfYear < 244) {
@@ -63,7 +69,7 @@ const ExamTable = () => {
                   aria-label="Lesson Card"
                   className="noselect border-red-500 active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full"
                   isPressable
-                  onPress={() => handlePress(exam)}
+                  onPress={() => handlePressCallback(exam)}
                 >
                   <CardBody className="flex items-center justify-center overflow-hidden h-32">
                     <b className="mt-auto mb-auto text-center text-xl p-2">
@@ -77,6 +83,7 @@ const ExamTable = () => {
           ))}
         </TableBody>
       </Table>
+      <ModalDialog isOpen={isOpen} onClose={onClose} data={modalData} />
     </div>
   );
 };

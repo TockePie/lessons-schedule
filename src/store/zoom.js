@@ -8,12 +8,20 @@ const zoomSlice = createSlice({
   name: "group",
   initialState,
   reducers: {
-    setIsPwaZoom: (state, action) => {
-      state.isPwaZoom = action.payload;
-      localStorage.setItem("isPwaZoom", action.payload ? "1" : "0");
+    switchPwaZoom: (state) => {
+      state.isPwaZoom = !state.isPwaZoom;
+      localStorage.setItem("isPwaZoom", state.isPwaZoom ? "1" : "0");
+    },
+    enablePwaZoom: (state) => {
+      state.isPwaZoom = true;
+      localStorage.setItem("isPwaZoom", "1");
+    },
+    disablePwaZoom: (state) => {
+      state.isPwaZoom = false;
+      localStorage.setItem("isPwaZoom", "0");
     },
   },
 });
 
-export const { setIsPwaZoom } = zoomSlice.actions;
+export const { switchPwaZoom, enablePwaZoom, disablePwaZoom } = zoomSlice.actions;
 export default zoomSlice.reducer;

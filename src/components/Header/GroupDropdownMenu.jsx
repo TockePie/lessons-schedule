@@ -22,7 +22,7 @@ import {
 } from "@nextui-org/react";
 
 import { setCurrentGroup } from "../../store/group";
-import { setIsPwaZoom } from "../../store/zoom";
+import { switchPwaZoom, disablePwaZoom } from "../../store/zoom";
 import { groupData, examsData } from "../../data/groupData";
 import { MobileContext } from "../../store/MobileContext";
 
@@ -33,31 +33,22 @@ const GroupDropdown = memo(function GroupDropdown() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const pathname = location.pathname.replace(/\/$/, '');
-  const [selectedTabKey, setSelectedTabKey] = useState("/lessons-schedule");
+  const pathname = useLocation().pathname.replace(/\/$/, "");
+  const [selectedTabKey, setSelectedTabKey] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    if (pathname === "/lessons-schedule") {
-      setSelectedTabKey("lessons");
-    } else if (pathname === "/lessons-schedule/exams") {
-      setSelectedTabKey("exams");
-    }
-  }, [pathname]);
 
   const handleSelectGroup = useCallback(
     (group) => {
       dispatch(setCurrentGroup(group));
       if (!groupData[group].allowPwaZoom) {
-        dispatch(setIsPwaZoom(false));
+        dispatch(disablePwaZoom());
       }
       setIsDropdownOpen(false);
     },
     [dispatch, setIsDropdownOpen]
   );
 
-  const handleExams = useCallback(
+  const handleNewPage = useCallback(
     (selectedKey) => {
       switch (selectedKey) {
         case "lessons":
@@ -71,11 +62,13 @@ const GroupDropdown = memo(function GroupDropdown() {
     [navigate]
   );
 
-  const handlePwaZoom = useCallback(() => {
-    const newState = !isPwaZoom;
-    dispatch(setIsPwaZoom(newState));
-    localStorage.setItem("isPwaZoom", newState ? "1" : "0");
-  }, [isPwaZoom, dispatch]);
+  useEffect(() => {
+    if (pathname === "/lessons-schedule") {
+      setSelectedTabKey("lessons");
+    } else if (pathname === "/lessons-schedule/exams") {
+      setSelectedTabKey("exams");
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -122,7 +115,10 @@ const GroupDropdown = memo(function GroupDropdown() {
       <DropdownMenu aria-label="list of groups">
         <DropdownSection showDivider>
           <DropdownItem textValue="Tabs for lessons and exams">
-            <Tabs selectedKey={selectedTabKey} onSelectionChange={handleExams}>
+            <Tabs
+              selectedKey={selectedTabKey}
+              onSelectionChange={handleNewPage}
+            >
               <Tab title="Заняття" key="lessons" />
               <Tab title="Іспити" key="exams" />
             </Tabs>
@@ -130,7 +126,7 @@ const GroupDropdown = memo(function GroupDropdown() {
           <DropdownItem textValue="PWA Zoom Toggle">
             <Switch
               size="sm"
-              onValueChange={handlePwaZoom}
+              onValueChange={() => dispatch(switchPwaZoom())}
               isSelected={isDesktopOrLaptop && isPwaZoom}
               isDisabled={!groupData[currentGroup]?.allowPwaZoom || isMobile}
             >

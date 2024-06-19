@@ -2,6 +2,8 @@ import { startTransition } from "react";
 import { Card, CardBody } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
+import styles from "../styles/ErrorPage.module.scss";
+
 export default function ErrorPage() {
   const navigate = useNavigate();
 
@@ -12,26 +14,23 @@ export default function ErrorPage() {
   };
 
   return (
-    <main className="flex flex-col gap-6 items-center justify-center">
-      <div className="flex flex-col items-center justify-center mt-32">
-        <h1 className="text-4xl font-black">Сторінка не існує</h1>
-        <p className="flex text-2xl text-center p-5">
-          Перевірте коректність введення URL-адреси
-        </p>
+    <main className={styles.main}>
+      <div className={styles.text}>
+        <h1>Сторінка не існує</h1>
+        <p>Перевірте коректність введення URL-адреси</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-96">
-        <Card isPressable onPress={() => handleNavigate("/")}>
+      <div className={styles.cards}>
+        <Card isPressable onPress={() => handleNavigate("/lessons-schedule")}>
           <CardBody>
-            <b className="mt-auto mb-auto text-center text-xl p-2">
-              Розклад груп
-            </b>
+            <b>Розклад груп</b>
           </CardBody>
         </Card>
-        <Card isPressable onPress={() => handleNavigate("/exams")}>
+        <Card
+          isPressable
+          onPress={() => handleNavigate("/lessons-schedule/exams")}
+        >
           <CardBody>
-            <b className="mt-auto mb-auto text-center text-xl p-2">
-              Іспити груп
-            </b>
+            <b>Іспити груп</b>
           </CardBody>
         </Card>
       </div>

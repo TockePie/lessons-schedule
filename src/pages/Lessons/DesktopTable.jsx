@@ -16,14 +16,15 @@ import {
 
 import ModalDialog from "../../components/ModalDialog.jsx";
 
+import handlePress from "../../utils/handlePressCard.js";
 import checkDay from "../../utils/checkDay.js";
 import checkWeek from "../../utils/checkWeek.js";
-import openLesson from "../../utils/openLesson.js";
 import getWeekText from "../../utils/getWeekText.js";
+import getLessonColor from "../../utils/getLessonColor.js";
 import { allDays } from "../../utils/getUkrainianWeek.js";
-import { setIsManualWeek } from "../../store/manualSchedule.js";
+import { switchWeeks } from "../../store/manualSchedule.js";
 
-import { lessonTypeToColor, rowIndices } from "../../common/constants.js";
+import { rowIndices } from "../../common/constants.js";
 import { groupData } from "../../data/groupData.js";
 
 export default function DesktopTable() {
@@ -53,20 +54,10 @@ export default function DesktopTable() {
     [currentGroup, isManualWeek]
   );
 
-  const handlePress = useCallback(
-    (lesson) => {
-      const opening = openLesson(lesson, isPwaZoom);
-      if (opening) {
-        setModalData(opening);
-        onOpen();
-      }
-    },
+  const handlePressCallback = useCallback(
+    (lesson) => handlePress(lesson, isPwaZoom, setModalData, onOpen),
     [isPwaZoom, onOpen]
   );
-
-  const handleSelectionChange = useCallback(() => {
-    dispatch(setIsManualWeek(!isManualWeek));
-  }, [dispatch, isManualWeek]);
 
   const memoizedTableHeader = useMemo(
     () => (
@@ -77,7 +68,7 @@ export default function DesktopTable() {
               color="secondary"
               size="sm"
               checked={isManualWeek}
-              onChange={handleSelectionChange}
+              onChange={() => dispatch(switchWeeks())}
             >
               {getWeekText("mobile", !checkWeek())}
             </Switch>
@@ -95,7 +86,7 @@ export default function DesktopTable() {
         ))}
       </TableHeader>
     ),
-    [isManualWeek, handleSelectionChange]
+    [isManualWeek, dispatch]
   );
 
   const memoizedTableBody = useMemo(
@@ -132,11 +123,11 @@ export default function DesktopTable() {
                   {lesson.lessonType != null && (
                     <Card
                       aria-label="Lesson Card"
-                      className={`noselect ${
-                        lessonTypeToColor[lesson.lessonType]
-                      } h-[7.8rem] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
+                      className={`noselect ${getLessonColor(
+                        lesson.lessonType
+                      )} h-[7.8rem] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
                       isPressable
-                      onPress={() => handlePress(lesson)}
+                      onPress={() => handlePressCallback(lesson)}
                     >
                       <CardBody className="flex items-center justify-center overflow-hidden">
                         <b className="mt-auto mb-auto text-center text-xl p-2">
@@ -153,7 +144,7 @@ export default function DesktopTable() {
         })}
       </TableBody>
     ),
-    [currentGroup, defineObject, handlePress]
+    [currentGroup, defineObject, handlePressCallback]
   );
 
   return (

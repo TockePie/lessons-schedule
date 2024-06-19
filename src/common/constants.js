@@ -1,9 +1,3 @@
-const lessonTypeToColor = {
-  lecture: "border-indigo-500",
-  practice: "border-red-500",
-  lab: "border-lime-500",
-};
-
 const rowIndices = [
   ["firstLessonsRow", { start: "08:30", end: "10:05" }],
   ["secondLessonsRow", { start: "10:25", end: "12:00" }],
@@ -24,4 +18,4 @@ const lessonTime = [
   { start: "20:20", end: "21:50" },
 ];
 
-export { lessonTypeToColor, rowIndices, lessonTime };
+export { rowIndices, lessonTime };

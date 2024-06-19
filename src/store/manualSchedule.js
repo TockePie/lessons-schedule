@@ -8,11 +8,11 @@ const manualScheduleSlice = createSlice({
   name: "manualSchedule",
   initialState,
   reducers: {
-    setIsManualWeek: (state, action) => {
-      state.isManualWeek = action.payload;
+    switchWeeks: (state) => {
+      state.isManualWeek = !state.isManualWeek;
     },
   },
 });
 
-export const { setIsManualWeek } = manualScheduleSlice.actions;
+export const { switchWeeks } = manualScheduleSlice.actions;
 export default manualScheduleSlice.reducer;
