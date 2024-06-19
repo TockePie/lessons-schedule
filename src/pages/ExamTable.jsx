@@ -58,7 +58,7 @@ const ExamTable = () => {
             <TableRow key={exam.id || index}>
               <TableCell>
                 <Card className="w-32">
-                  <CardBody className="flex items-center justify-between px-2 py-8 overflow-y-hidden">
+                  <CardBody className={`px-2 py-8 ${styles.body}`}>
                     <b className="text-large">{exam.date}</b>
                     <p>{exam.time}</p>
                   </CardBody>

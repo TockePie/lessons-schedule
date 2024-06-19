@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import checkDay from "../utils/checkDay";
+import { currentDay } from "../utils/getUkrainianWeek";
 
 const initialState = {
-  selectedDay: checkDay(),
+  selectedDay: currentDay()[0],
 };
 
 const manualDaySlice = createSlice({

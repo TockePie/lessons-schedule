@@ -1,7 +1,6 @@
 import { useContext, useMemo } from "react";
 import { Table, TableBody, TableColumn, TableHeader } from "@nextui-org/react";
 
-import checkDay from "../utils/checkDay.js";
 import { allDays, currentDay } from "../utils/getUkrainianWeek.js";
 
 import { MobileContext } from "../store/MobileContext.jsx";
@@ -28,7 +27,7 @@ export default function Summertime() {
         <div className="flex justify-center">Пари</div>
       </TableColumn>
       <TableColumn>
-        <div className="flex justify-center">{currentDay()}</div>
+        <div className="flex justify-center">{currentDay()[1]}</div>
       </TableColumn>
     </TableHeader>
   ) : (
@@ -40,7 +39,7 @@ export default function Summertime() {
         <TableColumn
           key={day.key}
           className={`${
-            checkDay() === day.key ? "bg-yellow-200 text-slate-950" : ""
+            currentDay()[0] === day.key ? "bg-yellow-200 text-slate-950" : ""
           }`}
         >
           <div className="flex justify-center">{day.label}</div>

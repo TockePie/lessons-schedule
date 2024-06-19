@@ -14,13 +14,6 @@
   border-1 
   w-full;
 
-  .body {
-    @apply flex 
-    items-center 
-    justify-center 
-    overflow-hidden;
-  }
-
   b {
     @apply mt-auto 
     mb-auto 
@@ -28,4 +21,11 @@
     text-xl 
     p-2;
   }
+}
+
+.body {
+  @apply flex 
+  items-center 
+  justify-center 
+  overflow-hidden;
 }

@@ -1,5 +1,3 @@
-import checkDay from "./checkDay";
-
 const allDays = [
   { key: "mon", label: "Понеділок" },
   { key: "tue", label: "Вівторок" },
@@ -10,19 +8,19 @@ const allDays = [
 ];
 
 const currentDay = () => {
-  switch (checkDay()) {
-    case "mon":
-      return "Понеділок";
-    case "tue":
-      return "Вівторок";
-    case "wed":
-      return "Середа";
-    case "thu":
-      return "Четвер";
-    case "fri":
-      return "П'ятниця";
-    case "sat":
-      return "Субота";
+  switch (new Date().getDay()) {
+    case 1:
+      return ["mon", "Понеділок"];
+    case 2:
+      return ["tue", "Вівторок"];
+    case 3:
+      return ["wed", "Середа"];
+    case 4:
+      return ["thu", "Четвер"];
+    case 5:
+      return ["fri", "П'ятниця"];
+    case 6:
+      return ["sat", "Субота"];
   }
 };
 
