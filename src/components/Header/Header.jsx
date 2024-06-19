@@ -16,13 +16,16 @@ const LazyImage = lazy(() =>
 function Header() {
   const { currentGroup } = useSelector((state) => state.group);
   const { isDesktopOrLaptop, isMobile } = useContext(MobileContext);
-  const groupLogo = groupData[currentGroup]?.image;
 
   return (
     <>
       <Navbar isBordered={isMobile} shouldHideOnScroll={isMobile}>
         <NavbarBrand>
-          <LazyImage width={50} alt="logo" src={groupLogo} />
+          <LazyImage
+            width={50}
+            alt="logo"
+            src={groupData[currentGroup]?.image}
+          />
           {isDesktopOrLaptop && <WeekInfo screen="desktop" />}
         </NavbarBrand>
         {isMobile && (

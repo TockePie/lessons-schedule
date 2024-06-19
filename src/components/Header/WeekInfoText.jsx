@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
 import checkWeek from "../../utils/checkWeek";
-import getWeekText from "../../utils/getWeekText";
-import examText from "../../utils/getExamText";
+import { getWeekText, getExamText } from "../../utils/getData";
 
 export default function WeekInfo(props) {
   const isOddWeek = useMemo(checkWeek, []);
@@ -17,7 +16,7 @@ export default function WeekInfo(props) {
         setWeekText(getWeekText(props.screen, isOddWeek));
         break;
       case "/lessons-schedule/exams":
-        setWeekText(examText(props.screen));
+        setWeekText(getExamText(props.screen));
         break;
     }
   }, [isOddWeek, pathname, props.screen]);

@@ -18,9 +18,7 @@ import ModalDialog from "../../components/ModalDialog.jsx";
 
 import handlePress from "../../utils/handlePressCard.js";
 import checkWeek from "../../utils/checkWeek.js";
-import getWeekText from "../../utils/getWeekText.js";
-import getLessonColor from "../../utils/getLessonColor.js";
-import { currentDay } from "../../utils/getUkrainianWeek.js";
+import { getLessonColor, getWeekText, getCurrentDay } from "../../utils/getData";
 import { switchWeeks } from "../../store/manualSchedule.js";
 
 import { groupData } from "../../data/groupData.js";
@@ -97,7 +95,7 @@ export default function MobileTable() {
         </TableColumn>
         <TableColumn>
           <div className="flex justify-center">
-            {new Date().getDay() === 0 ? "Неділя" : currentDay()[1]}
+            {new Date().getDay() === 0 ? "Неділя" : getCurrentDay()[1]}
           </div>
         </TableColumn>
       </TableHeader>
@@ -122,7 +120,7 @@ export default function MobileTable() {
       >
         {rowIndices.map(([rowName, time], i) => {
           if (currentGroup === "Оберіть групу") return;
-          const lessonRow = getLessonsForDay(currentDay()[0], rowName);
+          const lessonRow = getLessonsForDay(getCurrentDay()[0], rowName);
           if (lessonRow.length === 0) return;
 
           return (

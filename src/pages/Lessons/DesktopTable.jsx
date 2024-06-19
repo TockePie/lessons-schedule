@@ -18,9 +18,8 @@ import ModalDialog from "../../components/ModalDialog.jsx";
 
 import handlePress from "../../utils/handlePressCard.js";
 import checkWeek from "../../utils/checkWeek.js";
-import getWeekText from "../../utils/getWeekText.js";
-import getLessonColor from "../../utils/getLessonColor.js";
-import { allDays, currentDay } from "../../utils/getUkrainianWeek.js";
+import { getLessonColor, getWeekText, getCurrentDay } from "../../utils/getData";
+import { allDays } from "../../utils/getUkrainianWeek.js";
 import { switchWeeks } from "../../store/manualSchedule.js";
 
 import { rowIndices } from "../../common/constants.js";
@@ -78,7 +77,7 @@ export default function DesktopTable() {
           <TableColumn
             key={day.key}
             className={`${
-              currentDay()[0] === day.key ? "bg-yellow-200 text-slate-950" : ""
+              getCurrentDay()[0] === day.key ? "bg-yellow-200 text-slate-950" : ""
             }`}
           >
             <div className="flex justify-center">{day.label}</div>
