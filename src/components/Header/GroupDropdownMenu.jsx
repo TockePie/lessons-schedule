@@ -21,10 +21,13 @@ import {
   Tab,
 } from "@nextui-org/react";
 
+import { MobileContext } from "../../store/MobileContext";
+
 import { setCurrentGroup } from "../../store/group";
+import handleKeyPressing from "../../utils/handleKeyPressing";
+
 import { switchPwaZoom, disablePwaZoom } from "../../store/zoom";
 import { groupData, examsData } from "../../data/groupData";
-import { MobileContext } from "../../store/MobileContext";
 
 const GroupDropdown = memo(function GroupDropdown() {
   const { currentGroup } = useSelector((state) => state.group);
@@ -70,16 +73,7 @@ const GroupDropdown = memo(function GroupDropdown() {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "q" || event.key === "Q") {
-        setIsDropdownOpen((prevState) => !prevState);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  handleKeyPressing("q", () => setIsDropdownOpen((prevState) => !prevState));
 
   const dropdownItems = useMemo(() => {
     const items = selectedTabKey === "lessons" ? groupData : examsData;

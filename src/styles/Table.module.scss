@@ -1,0 +1,31 @@
+.time {
+  @apply text-nowrap 
+    h-[7.8rem] 
+    overflow-hidden;
+}
+
+.lessons {
+  @apply h-[7.8rem] 
+  active:bg-zinc-300 
+  hover:bg-zinc-200 
+  dark:active:bg-zinc-800 
+  dark:hover:bg-zinc-700 
+  cursor-pointer 
+  border-1 
+  w-full;
+
+  .body {
+    @apply flex 
+    items-center 
+    justify-center 
+    overflow-hidden;
+  }
+
+  b {
+    @apply mt-auto 
+    mb-auto 
+    text-center 
+    text-xl 
+    p-2;
+  }
+}

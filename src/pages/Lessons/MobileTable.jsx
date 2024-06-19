@@ -26,6 +26,7 @@ import { switchWeeks } from "../../store/manualSchedule.js";
 
 import { groupData } from "../../data/groupData.js";
 import { rowIndices } from "../../common/constants.js";
+import styles from "../../styles/Table.module.scss";
 
 export default function MobileTable() {
   const [modalData, setModalData] = useState({
@@ -123,7 +124,7 @@ export default function MobileTable() {
         {rowIndices.map(([rowName, time], i) => {
           if (currentGroup === "Оберіть групу") return;
           const lessonRow = getLessonsForDay(checkDay(), rowName);
-          if (getLessonsForDay(checkDay(), rowName).length === 0) return;
+          if (lessonRow.length === 0) return;
 
           return (
             <TableRow key={rowName}>
@@ -152,20 +153,14 @@ export default function MobileTable() {
                         key={idx}
                         aria-label="Lesson Card"
                         className={`noselect 
-                      active:bg-zinc-300 
-                      hover:bg-zinc-200 
-                      dark:active:bg-zinc-800 
-                      dark:hover:bg-zinc-700 
-                      cursor-pointer border-1 w-full ${getLessonColor(
-                        lesson.lessonType
-                      )} ${orientationValues("h-[34vh]", "h-[17vh]")}`}
+                      ${styles.lessons} ${getLessonColor(
+                          lesson.lessonType
+                        )} ${orientationValues("h-[34vh]", "h-[17vh]")}`}
                         isPressable
                         onPress={() => handlePressCallback(lesson)}
                       >
-                        <CardBody className="flex items-center justify-center overflow-hidden">
-                          <b className="mt-auto mb-auto text-center text-xl p-2">
-                            {lesson.lessonName}
-                          </b>
+                        <CardBody className={styles.body}>
+                          <b>{lesson.lessonName}</b>
                           <a>{lesson.teacher}</a>
                         </CardBody>
                       </Card>

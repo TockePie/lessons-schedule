@@ -26,6 +26,7 @@ import { switchWeeks } from "../../store/manualSchedule.js";
 
 import { rowIndices } from "../../common/constants.js";
 import { groupData } from "../../data/groupData.js";
+import styles from "../../styles/Table.module.scss";
 
 export default function DesktopTable() {
   const [modalData, setModalData] = useState({
@@ -107,7 +108,7 @@ export default function DesktopTable() {
               <TableCell className="min-w-16">
                 <Card
                   aria-label="Time Card"
-                  className="text-nowrap h-[7.8rem] noselect overflow-hidden"
+                  className={`noselect ${styles.time}`}
                 >
                   <CardBody>
                     <CardBody className="flex items-center justify-between px-2">
@@ -125,14 +126,12 @@ export default function DesktopTable() {
                       aria-label="Lesson Card"
                       className={`noselect ${getLessonColor(
                         lesson.lessonType
-                      )} h-[7.8rem] active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full`}
+                      )} ${styles.lessons}`}
                       isPressable
                       onPress={() => handlePressCallback(lesson)}
                     >
-                      <CardBody className="flex items-center justify-center overflow-hidden">
-                        <b className="mt-auto mb-auto text-center text-xl p-2">
-                          {lesson.lessonName}
-                        </b>
+                      <CardBody className={styles.body}>
+                        <b>{lesson.lessonName}</b>
                         <a>{lesson.teacher}</a>
                       </CardBody>
                     </Card>

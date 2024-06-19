@@ -3,17 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import checkWeek from "../../utils/checkWeek";
 import getWeekText from "../../utils/getWeekText";
-
-const examText = (screen) => {
-  switch (screen) {
-    case "desktop":
-      return "Розклад іспитів";
-    case "mobile":
-      return "Іспити";
-    default:
-      return "";
-  }
-};
+import examText from "../../utils/getExamText";
 
 export default function WeekInfo(props) {
   const isOddWeek = useMemo(checkWeek, []);

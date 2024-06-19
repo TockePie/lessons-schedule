@@ -16,9 +16,10 @@ import Summertime from "./Summertime";
 import ModalDialog from "../components/ModalDialog";
 
 import handlePress from "../utils/handlePressCard";
-import getDate from "../utils/getDate";
 
+import getDate from "../utils/getDate";
 import { examsData } from "../data/groupData";
+import styles from "../styles/Table.module.scss";
 
 const ExamTable = () => {
   const [modalData, setModalData] = useState({
@@ -46,12 +47,11 @@ const ExamTable = () => {
     <div className="mx-auto my-8 max-w-[25rem]">
       <Table striped hover aria-label="Exams Table">
         <TableHeader>
-          <TableColumn>
-            <div className="flex justify-center">Час</div>
-          </TableColumn>
-          <TableColumn>
-            <div className="flex justify-center">Предмет</div>
-          </TableColumn>
+          {["Час", "Предмет"].map((header) => (
+            <TableColumn key={header}>
+              <div className="flex justify-center">{header}</div>
+            </TableColumn>
+          ))}
         </TableHeader>
         <TableBody>
           {exams?.map((exam, index) => (
@@ -67,14 +67,12 @@ const ExamTable = () => {
               <TableCell>
                 <Card
                   aria-label="Lesson Card"
-                  className="noselect border-red-500 active:bg-zinc-300 hover:bg-zinc-200 dark:active:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer border-1 w-full"
+                  className={`noselect border-red-500 ${styles.lessons}`}
                   isPressable
                   onPress={() => handlePressCallback(exam)}
                 >
-                  <CardBody className="flex items-center justify-center overflow-hidden h-32">
-                    <b className="mt-auto mb-auto text-center text-xl p-2">
-                      {exam.lessonName}
-                    </b>
+                  <CardBody className={`${styles.body} h-32`}>
+                    <b>{exam.lessonName}</b>
                     <a>{exam.teacher}</a>
                   </CardBody>
                 </Card>
