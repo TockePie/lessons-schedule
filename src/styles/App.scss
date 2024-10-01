@@ -1,0 +1,11 @@
+body {
+  @media (prefers-color-scheme: dark) {
+    background-color: #212529 !important;
+  }
+}
+
+main {
+  @media (min-width: 845px) {
+    padding-top: 4rem;
+  }
+}
