@@ -1,4 +1,8 @@
+import { selectives } from "./selectives";
+
 export const GROUP = "ІО-32";
+
+const selective = JSON.parse(localStorage.getItem("selectedValue"));
 
 const emptyLesson = {
   lessonName: null,
@@ -11,17 +15,19 @@ export const evenLessons = {
   firstLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "religion"
+        ? selectives.religion.lecture
+        : selective === "cities"
+        ? selectives.cities.lecture
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
-      ...emptyLesson,
-      // lessonName: "Психологія Конфлікту",
-      // lessonType: "practice",
-      // teacher: "Чумаков В.",
-      // url: "https://us05web.zoom.us/j/6297129205?pwd=sToGoAQibuvceQR7FF3jHu0l8H9vHV.1",
-      // urlPwa:
-      //   "https://app.zoom.us/wc/6297129205/join?pwd=sToGoAQibuvceQR7FF3jHu0l8H9vHV.1",
+      ...(selective === "psychology"
+        ? selectives.psychology.lecture
+        : selective === "psychologyConflict"
+        ? selectives.psychologyConflict.practice
+        : emptyLesson),
     },
     {
       dayOfWeek: "wed",
@@ -58,7 +64,11 @@ export const evenLessons = {
   secondLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "psychologyMent"
+        ? selectives.psychologyMent.lecture
+        : selective === "digitalTransformation"
+        ? selectives.digitalTransformation.lecture
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
@@ -102,7 +112,9 @@ export const evenLessons = {
   thirdLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "citizensResponsibility"
+        ? selectives.citizensResponsibility.lecture
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
@@ -188,17 +200,19 @@ export const oddLessons = {
   firstLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "religion"
+        ? selectives.religion.practice
+        : selective === "cities"
+        ? selectives.cities.practice
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
-      ...emptyLesson,
-      // lessonName: "Психологія Конфлікту",
-      // lessonType: "lecture",
-      // teacher: "Сербова О.",
-      // url: "https://us05web.zoom.us/j/9299459744?pwd=Z3VQdWEvQ0tyc3pMbzl2bHN6Y1VlUT09",
-      // urlPwa:
-      //   "https://app.zoom.us/wc/9299459744/join?pwd=Z3VQdWEvQ0tyc3pMbzl2bHN6Y1VlUT09",
+      ...(selective === "psychology"
+        ? selectives.psychology.practice
+        : selective === "psychologyConflict"
+        ? selectives.psychologyConflict.lecture
+        : emptyLesson),
     },
     {
       dayOfWeek: "wed",
@@ -213,7 +227,9 @@ export const oddLessons = {
   secondLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "digitalTransformation"
+        ? selectives.digitalTransformation.practice
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
@@ -246,7 +262,11 @@ export const oddLessons = {
   thirdLessonsRow: [
     {
       dayOfWeek: "mon",
-      ...emptyLesson,
+      ...(selective === "citizensResponsibility"
+        ? selectives.citizensResponsibility.practice
+        : selective === "psychologyMent"
+        ? selectives.psychologyMent.practice
+        : emptyLesson),
     },
     {
       dayOfWeek: "tue",
