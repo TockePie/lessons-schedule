@@ -113,6 +113,7 @@ const GroupDropdown = memo(function GroupDropdown() {
         <DropdownMenu
           aria-label="list of groups"
           disabledKeys={
+            groupData[currentGroup] &&
             !groupData[currentGroup].allowSelectives && ["selectives"]
           }
         >
