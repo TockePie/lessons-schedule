@@ -110,7 +110,12 @@ const GroupDropdown = memo(function GroupDropdown() {
             {isDesktopOrLaptop && <Kbd>Q</Kbd>}
           </Button>
         </DropdownTrigger>
-        <DropdownMenu aria-label="list of groups">
+        <DropdownMenu
+          aria-label="list of groups"
+          disabledKeys={
+            !groupData[currentGroup].allowSelectives && ["selectives"]
+          }
+        >
           <DropdownSection showDivider>
             <DropdownItem textValue="Tabs for lessons and exams">
               <Tabs
@@ -131,7 +136,9 @@ const GroupDropdown = memo(function GroupDropdown() {
                 PWA ZOOM
               </Switch>
             </DropdownItem>
-            <DropdownItem onPress={onOpen}>Обрати вибіркові</DropdownItem>
+            <DropdownItem onPress={onOpen} key="selectives">
+              Обрати вибіркові
+            </DropdownItem>
           </DropdownSection>
           {dropdownItems}
         </DropdownMenu>
